@@ -1,0 +1,9 @@
+hqsbase>=0.7.0
+qoqo>=0.2.2
+numpy
+pytest
+networkx
+pyyaml
+
+[:python_version != "3.7"]
+myqlm
