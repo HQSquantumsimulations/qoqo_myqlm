@@ -6,7 +6,7 @@ To clarify the intellectual property license granted with Contributions from any
 
 Please fill and sign the CLA found at *url* and send it to info@quantumsimulations.de.
 
-## Code Guidlines
+## Code Guidelines
 
 1. Testing: We use pytest for this project. We require that all previous tests pass and that your provide proper tests with your contribution.
 2. MyPy: We use type annotations and mypy to check for proper type annotations and usage of types throughout the code.
