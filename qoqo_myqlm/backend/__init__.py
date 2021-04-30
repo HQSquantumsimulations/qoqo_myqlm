@@ -20,3 +20,5 @@
 from qoqo_myqlm.backend.myqlm_backend import (
     MyQLMBackend,
 )
+
+__all__ = ('MyQLMBackend',)

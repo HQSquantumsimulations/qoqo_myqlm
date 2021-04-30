@@ -31,7 +31,7 @@ from qoqo.registers import (
 )
 from qoqo.devices import DeviceBaseClass
 from hqsbase.qonfig import Qonfig, empty
-from qoqo_myqlm import myqlm_call_circuit
+from qoqo_myqlm.interface import myqlm_call_circuit
 import numpy as np
 import warnings
 import qat

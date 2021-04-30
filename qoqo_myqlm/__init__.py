@@ -30,3 +30,5 @@ from qoqo_myqlm.interface import (
 from qoqo_myqlm.backend import (
     MyQLMBackend,
 )
+
+__all__ = ('__version__', 'myqlm_call_operation', 'myqlm_call_circuit', 'MyQLMBackend')
