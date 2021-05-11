@@ -1,3 +1,7 @@
+<img src="qoqo_Logo_vertical_color.png" alt="qoqo logo" width="300" />
+
+
+# qoqo_myqlm
 
 MyQLM interface for for the qoqo quantum toolkit by [HQS Quantum Simulations](https://quantumsimulations.de).
 
