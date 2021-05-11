@@ -35,5 +35,5 @@ jobs:
       - name: Mypy check
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          mypy --config-file=./.mypy.ini ./qoqo  
+          mypy --config-file=./mypy_ini ./qoqo  
 
