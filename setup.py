@@ -27,7 +27,7 @@ __version__ = lines[-1].strip().split("'")[1].strip()
 install_requires = [
     'myqlm; python_version != "3.7.*,3.9.*"',
     'hqsbase>=0.7.0',
-    'qoqo>=0.3.0',
+    'qoqo>=0.4.0',
     'numpy',
     'pytest',
     'networkx',
