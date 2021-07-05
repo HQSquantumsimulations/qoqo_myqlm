@@ -19,35 +19,29 @@ from qoqo import Circuit
 from qoqo_myqlm import (
     MyQLMBackend
 )
-from typing import Any, cast
 import math
 from hqsbase.calculator import (
     CalculatorFloat,
     Calculator
 )
-from hqsbase.qonfig import Qonfig
 
 
-# def test_myqlm_backend():
-#     """Testing the MyQLM functionality with the MyQLM backend"""
-#     circuit = Circuit()
-#     circuit += ops.Definition(name='ro', vartype='bit', length=2, is_output=True)
-#     circuit += ops.RotateZ(qubit=0, theta=0)
-#     circuit += ops.PauliX(qubit=1)
-#     circuit += ops.MeasureQubit(qubit=0)
-#     circuit += ops.MeasureQubit(qubit=1)
+def test_myqlm_backend():
+    """Testing the MyQLM functionality with the MyQLM backend"""
+    circuit = Circuit()
+    circuit += ops.DefinitionBit(name='ro', length=2, is_output=True)
+    circuit += ops.RotateZ(qubit=0, theta=0)
+    circuit += ops.PauliX(qubit=1)
+    circuit += ops.MeasureQubit(qubit=0, readout='ro', readout_index=0)
+    circuit += ops.MeasureQubit(qubit=1, readout='ro', readout_index=1)
 
-#     backend = MyQLMBackend(circuit=circuit,
-#                            number_qubits=2,
-#                            number_measurements=5)
+    backend = MyQLMBackend(number_qubits=2,
+                           number_measurements=5)
 
-#     results = backend.run()['ro'].register
-#     npt.assert_equal(results, [np.array([0., 1.])] * 5)
-
-#     config = backend.to_qonfig()
-#     json = config.to_json()
-#     config2 = Qonfig.from_json(json)
-#     backend2 = config2.to_instance()
+    # (bit_dict, float_dict, complex_dict) = backend.run_circuit(circuit)
+    # npt.assert_equal(float_dict, dict())
+    # npt.assert_equal(complex_dict, dict())
+    # npt.assert_equal(bit_dict['ro'], [np.array([0., 1.])] * 5)
 
 
 if __name__ == '__main__':
