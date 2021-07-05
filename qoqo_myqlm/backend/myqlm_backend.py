@@ -135,9 +135,8 @@ class MyQLMBackend(object):
                                           aggregate_data=False)
 
         result = self.qpu.submit(job)
-        conv_dict = {False: 0., True: 1.}
         for sample in result:
-            array = [conv_dict.get(qubit_state) for qubit_state in sample.state]
+            array = [qubit_state for qubit_state in sample.state]
             output_bit_register_dict['ro'].append(array)
 
         return output_bit_register_dict, output_float_register_dict, output_complex_register_dict
