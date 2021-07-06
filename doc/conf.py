@@ -52,7 +52,6 @@ autosummary_generate = True
 autosummary_imported_members = True
 # define mock imports for packages that are difficult to handle / install
 alist = []
-alist.extend(['hqsbase', 'calculatorqore'])
 autodoc_mock_imports = alist
 
 # 'both': class and __init__ docstring are concatenated and inserted

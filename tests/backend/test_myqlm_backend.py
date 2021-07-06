@@ -20,7 +20,7 @@ from qoqo_myqlm import (
     MyQLMBackend
 )
 import math
-from hqsbase.calculator import (
+from qoqo_calculator_pyo3 import (
     CalculatorFloat,
     Calculator
 )
