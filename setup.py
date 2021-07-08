@@ -18,6 +18,7 @@ with open(os.path.join(path, 'README.md')) as file:
 
 License = 'Apache-2.0'
 
+
 # obtain current version
 __version__ = None
 with open(os.path.join(path, 'qoqo_myqlm/__version__.py')) as f:
@@ -29,9 +30,6 @@ install_requires = [
     'qoqo_calculator_pyo3>=0.3.0',
     'qoqo>=0.4.0',
     'numpy',
-    'pytest',
-    'networkx',
-    'pyyaml',
 ]
 
 authors = 'HQS Quantum Simulations'
