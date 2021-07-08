@@ -1,5 +1,4 @@
 qoqo>=0.4.0
-qoqo-calculator-pyo3>=0.3.0
 qoqo_myqlm>=0.2.0
 numpy
 sphinx >= 2.1
