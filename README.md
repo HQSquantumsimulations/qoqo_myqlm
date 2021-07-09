@@ -21,3 +21,8 @@ _Testing_
 Due to the myQLM license we are limited in the automatic code quality checks we can perform for qoqo-myqlm. If you find unexpected behaviour please open a github issue. You can also run the pytests in qoqo_myqlm/tests/ locally.
 
 This software is still in the beta stage. Functions and documentation are not yet complete and breaking changes can occur.
+
+_Installation_
+
+qoqo_myqlm is available on PyPi (https://pypi.org/project/qoqo-myqlm/), and can be installed via pip:
+pip install qoqo-myqlm
