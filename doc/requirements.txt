@@ -1,6 +1,6 @@
 qoqo>=0.4.0
-qoqo_myqlm>=0.2.0
 numpy
+pyyaml
 sphinx >= 2.1
 nbsphinx
 pygments
