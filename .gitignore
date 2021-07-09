@@ -1,5 +1,6 @@
 Cargo.lock
 target/*
-*__pycache__/*
+*/__pycache__/*
 .mypy_cache*
 *.egg-info*
+doc/_build/*
