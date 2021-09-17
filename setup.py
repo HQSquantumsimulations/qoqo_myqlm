@@ -28,7 +28,7 @@ __version__ = lines[-1].strip().split("'")[1].strip()
 install_requires = [
     'myqlm; python_version != "3.7.*,3.9.*"',
     'qoqo_calculator_pyo3>=0.2.0',
-    'qoqo>=0.4.0',
+    'qoqo>=0.6.1',
     'numpy',
 ]
 
