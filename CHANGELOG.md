@@ -1,8 +1,10 @@
 # Changelog
 
-This changelog track changes to the qoqo qasm project starting at version 0.5.0
-
 ## Not released
+
+## 0.3.1
+
+* Updated requirements and removed support for python 3.6
 
 ## 0.3.0
 
