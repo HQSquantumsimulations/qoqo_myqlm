@@ -1,5 +1,5 @@
 
-myqlm ; python_version != ('3.7', '3.9')
+myqlm ; python_version == ('3.8', '3.10')
 qoqo_calculator_pyo3>=0.6.0
 qoqo>=0.10
 numpy

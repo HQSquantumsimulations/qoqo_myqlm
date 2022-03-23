@@ -2,7 +2,7 @@
 
 ## Not released
 
-## 0.3.1
+## 0.4.0
 
 * Updated requirements and removed support for python 3.6
 
