@@ -1,4 +1,4 @@
-qoqo>=0.10.0
+qoqo>=1.0.0-a2
 numpy
 pyyaml
 sphinx >= 2.1
