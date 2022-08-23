@@ -37,10 +37,10 @@ class MyQLMBackend(object):
     def __init__(self,
                  number_qubits: int = 1,
                  number_measurements: int = 1,
-                 device: Optional[Any] = None,
+                 device: Optional[Any] = None,  # noqa
                  job_type: str = "SAMPLE",
                  observable: Optional[np.ndarray] = None,
-                 qpu: Any = None) -> None:
+                 qpu: Any = None) -> None:  # noqa
         """Initialize MyQLM Backend
 
         Args:
@@ -141,7 +141,7 @@ class MyQLMBackend(object):
 
         return output_bit_register_dict, output_float_register_dict, output_complex_register_dict
 
-    def run_measurement_registers(self, measurement: Any
+    def run_measurement_registers(self, measurement: Any  # noqa
                                   ) -> Tuple[Dict[str, List[List[bool]]],
                                              Dict[str, List[List[float]]],
                                              Dict[str, List[List[complex]]]]:
@@ -178,7 +178,7 @@ class MyQLMBackend(object):
             output_float_register_dict,
             output_complex_register_dict)
 
-    def run_measurement(self, measurement: Any
+    def run_measurement(self, measurement: Any  # noqa
                         ) -> Optional[Dict[str, float]]:
         """Run a circuit with the PyQuEST backend
 

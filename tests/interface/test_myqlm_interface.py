@@ -16,10 +16,6 @@ import numpy as np
 import numpy.testing as npt
 from qoqo import operations as ops
 from qoqo import Circuit
-from typing import (
-    Dict,
-    Any
-)
 from qoqo_myqlm import myqlm_call_circuit, myqlm_call_operation
 import qat.lang.AQASM as qlm
 
