@@ -2,9 +2,9 @@
 
 ## Not released
 
-### Updated
+## 0.4.2
 
-* Updated to qoqo 1.0.0-a2 and qoqo_calculator 0.8
+* Updated to qoqo 1.0.0 and qoqo_calculator 1.0.0
 
 ## 0.4.1
 

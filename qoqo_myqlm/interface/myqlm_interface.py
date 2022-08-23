@@ -53,7 +53,7 @@ def myqlm_call_circuit(
 
 
 def myqlm_call_operation(
-        operation: Any,
+        operation: Any,  # noqa
         qureg: qlm.Program.qalloc) -> List:
     """Translate a qoqo operation to MyQLM text
 
