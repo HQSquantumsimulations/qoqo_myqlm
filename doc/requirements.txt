@@ -1,4 +1,5 @@
-qoqo>=1.0.0-a2
+qoqo>=1.0.0
+qoqo_calculator_pyo3>=1.0.0
 numpy
 pyyaml
 sphinx >= 2.1
