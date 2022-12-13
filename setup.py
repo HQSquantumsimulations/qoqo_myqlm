@@ -26,7 +26,7 @@ with open(os.path.join(path, 'qoqo_myqlm/__version__.py')) as f:
 __version__ = lines[-1].strip().split("'")[1].strip()
 
 install_requires = [
-    'myqlm; python_version == "3.8.*,3.10.*"',
+    'myqlm; python_version == "3.8.*, 3.10.*"',
     'qoqo_calculator_pyo3>=1.0.0',
     'qoqo>=1.0.0',
     'numpy',
@@ -44,6 +44,6 @@ setup(name='qoqo_myqlm',
       author_email='info@quantumsimulations.de',
       url='https://quantumsimulations.de',
       license=License,
-      python_requires='==3.8,==3.10',
+      python_requires='>=3.8.*, !=3.9.*, !=3.11.*',
       install_requires=install_requires,
       )
