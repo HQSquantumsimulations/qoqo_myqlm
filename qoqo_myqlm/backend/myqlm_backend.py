@@ -23,7 +23,7 @@ from qoqo_myqlm.interface import myqlm_call_circuit
 import numpy as np
 import warnings
 import qat
-from qat.qpus import get_default_qpu
+from qat.qpus import get_default_qpu ,LinAlg
 
 
 class MyQLMBackend(object):
@@ -65,7 +65,7 @@ class MyQLMBackend(object):
         self.device = device
         self.job_type = job_type
         if qpu is None:
-            qpu = get_default_qpu()
+            qpu = LinAlg()
         self.qpu = qpu
 
         if job_type == "SAMPLE":

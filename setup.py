@@ -44,6 +44,6 @@ setup(name='qoqo_myqlm',
       author_email='info@quantumsimulations.de',
       url='https://quantumsimulations.de',
       license=License,
-      python_requires='==3.8,==3.10',
+      python_requires='>=3.8.*, !=3.9.*, !=3.11.*',
       install_requires=install_requires,
       )
