@@ -23,7 +23,7 @@ from qoqo_myqlm.interface import myqlm_call_circuit
 import numpy as np
 import warnings
 import qat
-from qat.qpus import get_default_qpu ,LinAlg
+from qat.qpus import get_default_qpu
 
 
 class MyQLMBackend(object):
@@ -65,7 +65,7 @@ class MyQLMBackend(object):
         self.device = device
         self.job_type = job_type
         if qpu is None:
-            qpu = LinAlg()
+            qpu = get_default_qpu()
         self.qpu = qpu
 
         if job_type == "SAMPLE":
@@ -137,7 +137,7 @@ class MyQLMBackend(object):
         result = self.qpu.submit(job)
         for sample in result:
             array = [qubit_state for qubit_state in sample.state]
-            output_bit_register_dict['ro'].append(array)
+            output_bit_register_dict[list(output_bit_register_dict.keys())[0]].append(array)
 
         return output_bit_register_dict, output_float_register_dict, output_complex_register_dict
 

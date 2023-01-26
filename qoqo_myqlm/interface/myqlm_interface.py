@@ -115,7 +115,11 @@ def myqlm_call_operation(
         pass
     elif 'PragmaRepeatedMeasurement' in tags:
         pass
+    elif 'PragmaOperation' in tags:
+        pass
+    elif 'PragmaLoop' in tags:
+        pass
     else:
-        raise RuntimeError('Operation not in MyQLM backend')
+        raise RuntimeError(f'Operation not in MyQLM backend tags={tags}')
 
     return op
