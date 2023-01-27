@@ -123,6 +123,8 @@ def myqlm_call_operation(
         pass
     elif 'PragmaLoop' in tags:
         pass
+    elif 'PragmaSetNumberOfMeasurements' in tags:
+        pass
     else:
         raise RuntimeError(f'Operation not in MyQLM backend tags={tags}')
 
