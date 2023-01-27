@@ -38,14 +38,20 @@ def myqlm_call_circuit(
     """
     myqlm_program = qlm.Program()
     qureg = myqlm_program.qalloc(number_qubits)
-
+    # search for a PragmaLoop, and set the number of repetitions
+    number_of_repetitions = 1
     for op in circuit:
-        if 'PragmaActiveReset' in op.tags():
-            myqlm_program.reset(op.involved_qubits)
-        else:
-            instructions = myqlm_call_operation(op, qureg)
-            if instructions is not None:
-                myqlm_program.apply(*instructions)
+        if "PragmaLoop" in op.tags():
+            number_of_repetitions = int(op.repetitions().value)
+
+    for _ in range(number_of_repetitions):
+        for op in circuit:
+            if 'PragmaActiveReset' in op.tags():
+                myqlm_program.reset(op.involved_qubits)
+            else:
+                instructions = myqlm_call_operation(op, qureg)
+                if instructions is not None:
+                    myqlm_program.apply(*instructions)
 
     myqlm_circuit = myqlm_program.to_circ()
 
@@ -114,8 +120,6 @@ def myqlm_call_operation(
     elif 'Definition' in tags:
         pass
     elif 'PragmaRepeatedMeasurement' in tags:
-        pass
-    elif 'PragmaOperation' in tags:
         pass
     elif 'PragmaLoop' in tags:
         pass
