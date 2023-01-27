@@ -42,7 +42,7 @@ def myqlm_call_circuit(
     number_of_repetitions = 1
     for op in circuit:
         if "PragmaLoop" in op.tags():
-            number_of_repetitions = int(op.repetitions().value)
+            number_of_repetitions = max(1,int(op.repetitions().value))
 
     for _ in range(number_of_repetitions):
         for op in circuit:
