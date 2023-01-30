@@ -37,17 +37,19 @@ def myqlm_call_circuit(
         qlm.Program: translated circuit
     """
     myqlm_program = qlm.Program()
-    qureg = myqlm_program.qalloc(number_qubits)
-    # search for a PragmaLoop, and set the number of repetitions
-    number_of_repetitions = 1
+    qureg = myqlm_program.qalloc(number_qubits)    
     for op in circuit:
-        if "PragmaLoop" in op.tags():
-            number_of_repetitions = max(1,int(op.repetitions().value))
+        if 'PragmaActiveReset' in op.tags():
+            myqlm_program.reset(op.involved_qubits)
+        else:
+            if "PragmaLoop" in op.tags():
+                number_of_repetitions = max(1,int(op.repetitions().value))
+                for op_loop in op.circuit():
+                    for _ in range(number_of_repetitions):
+                        instructions = myqlm_call_operation(op_loop, qureg)
+                        if instructions is not None:
+                            myqlm_program.apply(*instructions)
 
-    for _ in range(number_of_repetitions):
-        for op in circuit:
-            if 'PragmaActiveReset' in op.tags():
-                myqlm_program.reset(op.involved_qubits)
             else:
                 instructions = myqlm_call_operation(op, qureg)
                 if instructions is not None:
@@ -121,9 +123,13 @@ def myqlm_call_operation(
         pass
     elif 'PragmaRepeatedMeasurement' in tags:
         pass
-    elif 'PragmaLoop' in tags:
-        pass
     elif 'PragmaSetNumberOfMeasurements' in tags:
+        pass
+    elif 'PragmaStartDecompositionBlock' in tags:
+        pass
+    elif 'PragmaGlobalPhase' in tags:
+        pass
+    elif 'PragmaStopDecompositionBlock' in tags:
         pass
     else:
         raise RuntimeError(f'Operation not in MyQLM backend tags={tags}')
