@@ -41,20 +41,23 @@ def myqlm_call_circuit(
     for op in circuit:
         if 'PragmaActiveReset' in op.tags():
             myqlm_program.reset(op.involved_qubits)
-        else:
-            if "PragmaLoop" in op.tags():
-                number_of_repetitions = max(1,int(op.repetitions().value))
+        
+        elif "PragmaLoop" in op.tags():
+            number_of_repetitions = max(1,int(op.repetitions().value))
+            for _ in range(number_of_repetitions):
                 for op_loop in op.circuit():
-                    for _ in range(number_of_repetitions):
-                        instructions = myqlm_call_operation(op_loop, qureg)
-                        if instructions is not None:
-                            myqlm_program.apply(*instructions)
+                    instructions = myqlm_call_operation(op_loop, qureg)
+                    if instructions is not None:
+                        myqlm_program.apply(*instructions)
 
-            else:
-                instructions = myqlm_call_operation(op, qureg)
-                if instructions is not None:
-                    myqlm_program.apply(*instructions)
+        else:
+            instructions = myqlm_call_operation(op, qureg)
+            if instructions is not None:
+                myqlm_program.apply(*instructions)
 
+    # circuit = myqlm_program.to_circ()
+    # for op in circuit.iterate_simple():
+    #    print(op)
     myqlm_circuit = myqlm_program.to_circ()
 
     return myqlm_circuit
