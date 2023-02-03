@@ -22,6 +22,7 @@ import qat.lang.AQASM as qlm
 def myqlm_call_circuit(
         circuit: Circuit,
         number_qubits: int,
+        all_qubits: bool = False,
         **kwargs) -> qlm.Program:
     """Translate the qoqo circuit into MyQLM ouput
 
@@ -49,6 +50,11 @@ def myqlm_call_circuit(
                     instructions = myqlm_call_operation(op_loop, qureg)
                     if instructions is not None:
                         myqlm_program.apply(*instructions)
+                    if all_qubits:
+                        # add an identity gate to all qubits but the ones involved in the operation
+                        for qubit in range(number_qubits):
+                            if qubit not in [op_loop.qubit()]:
+                                myqlm_program.apply(qlm.I, qureg[qubit])
 
         else:
             instructions = myqlm_call_operation(op, qureg)
@@ -133,6 +139,8 @@ def myqlm_call_operation(
     elif 'PragmaGlobalPhase' in tags:
         pass
     elif 'PragmaStopDecompositionBlock' in tags:
+        pass
+    elif 'PragmaStopParallelBlock' in tags:
         pass
     else:
         raise RuntimeError(f'Operation not in MyQLM backend tags={tags}')
