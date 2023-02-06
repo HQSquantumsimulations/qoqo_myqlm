@@ -53,7 +53,7 @@ def myqlm_call_circuit(
                     if all_qubits:
                         # add an identity gate to all qubits but the ones involved in the operation
                         for qubit in range(number_qubits):
-                            if qubit not in [op_loop.qubit()]:
+                            if hasattr(op_loop, "qubit") and qubit not in [op_loop.qubit()]:
                                 myqlm_program.apply(qlm.I, qureg[qubit])
 
         else:
