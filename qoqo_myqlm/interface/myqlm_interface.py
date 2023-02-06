@@ -38,7 +38,7 @@ def myqlm_call_circuit(
         qlm.Program: translated circuit
     """
     myqlm_program = qlm.Program()
-    qureg = myqlm_program.qalloc(number_qubits)    
+    qureg = myqlm_program.qalloc(number_qubits)
     for op in circuit:
         if 'PragmaActiveReset' in op.tags():
             myqlm_program.reset(op.involved_qubits)
@@ -54,6 +54,9 @@ def myqlm_call_circuit(
                         # add an identity gate to all qubits but the ones involved in the operation
                         for qubit in range(number_qubits):
                             if hasattr(op_loop, "qubit") and qubit not in [op_loop.qubit()]:
+                                myqlm_program.apply(qlm.I, qureg[qubit])
+                            elif hasattr(op_loop, "control") and hasattr(op_loop, "target")  and\
+                                qubit not in [op_loop.control(),op_loop.target()]:
                                 myqlm_program.apply(qlm.I, qureg[qubit])
 
         else:
