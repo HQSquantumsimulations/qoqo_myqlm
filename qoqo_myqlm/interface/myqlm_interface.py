@@ -19,6 +19,8 @@ from typing import (
 import qat.lang.AQASM as qlm
 
 
+
+
 def myqlm_call_circuit(
         circuit: Circuit,
         number_qubits: int,
@@ -50,26 +52,28 @@ def myqlm_call_circuit(
                     instructions = myqlm_call_operation(op_loop, qureg)
                     if instructions is not None:
                         myqlm_program.apply(*instructions)
-                    if all_qubits:
-                        # add an identity gate to all qubits but the ones involved in the operation
-                        for qubit in range(number_qubits):
-                            if hasattr(op_loop, "qubit") and qubit not in [op_loop.qubit()]:
-                                myqlm_program.apply(qlm.I, qureg[qubit])
-                            elif hasattr(op_loop, "control") and hasattr(op_loop, "target")  and\
-                                qubit not in [op_loop.control(),op_loop.target()]:
-                                myqlm_program.apply(qlm.I, qureg[qubit])
+                        if all_qubits:
+                            apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op_loop, instructions)
 
         else:
             instructions = myqlm_call_operation(op, qureg)
             if instructions is not None:
                 myqlm_program.apply(*instructions)
+                if all_qubits:
+                    apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op, instructions)
 
-    # circuit = myqlm_program.to_circ()
-    # for op in circuit.iterate_simple():
-    #    print(op)
+
     myqlm_circuit = myqlm_program.to_circ()
-
+    # for op in myqlm_circuit.iterate_simple():
+    #    print(op)
     return myqlm_circuit
+
+def apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op_loop, instructions):
+    active_qubits = [int(qb.to_dict()['data']) for qb in instructions[1:]]
+    for qubit in range(number_qubits):
+        if qubit not in active_qubits:
+            myqlm_program.apply(qlm.I, qureg[qubit])
+
 
 
 def myqlm_call_operation(
