@@ -41,7 +41,7 @@ class MyQLMBackend(object):
                  job_type: str = "SAMPLE",
                  observable: Optional[np.ndarray] = None,
                  qpu: Any = None,
-                 all_qubits: bool = False) -> None:  # noqa
+                 mode: str = "parallelization_blocks") -> None:  # noqa
         """Initialize MyQLM Backend
 
         Args:
@@ -56,6 +56,7 @@ class MyQLMBackend(object):
             observable: if "OBS" is selected as the job type, this is the matrix of
                         the observable to measure.
             qpu: QPU machine to use (quantum processor or simulator) with relevant keywords
+            mode: noise mode, can be active_qubits_only, parallelization_blocks, all_qubits
 
         Raises:
             TypeError: Job_type specified is neither 'SAMPLE' nor 'OBS'
@@ -68,7 +69,7 @@ class MyQLMBackend(object):
         if qpu is None:
             qpu = get_default_qpu()
         self.qpu = qpu
-        self.all_qubts = all_qubits
+        self.all_qubts = True if mode=="all_qubits" else False
 
         if job_type == "SAMPLE":
             if observable is not None:
