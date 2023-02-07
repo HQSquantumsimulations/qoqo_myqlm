@@ -64,6 +64,12 @@ def myqlm_call_circuit(
 
 
     myqlm_circuit = myqlm_program.to_circ()
+    # for op in circuit:
+    #     if 'PragmaLoop' in op.tags():
+    #         for op_loop in op.circuit():
+    #             print(op_loop)
+    #     else:
+    #         print(op)
     # for op in myqlm_circuit.iterate_simple():
     #    print(op)
     return myqlm_circuit
