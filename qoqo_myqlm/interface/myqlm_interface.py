@@ -47,7 +47,7 @@ def myqlm_call_circuit(
         
         elif "PragmaLoop" in op.tags():
             number_of_repetitions = max(0,int(op.repetitions().value))
-            for _ in range(number_of_repetitions+1):
+            for _ in range(number_of_repetitions):
                 for op_loop in op.circuit():
                     instructions = myqlm_call_operation(op_loop, qureg)
                     if instructions is not None:
