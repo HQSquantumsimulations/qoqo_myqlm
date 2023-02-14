@@ -44,16 +44,18 @@ def myqlm_call_circuit(
     for op in circuit:
         if 'PragmaActiveReset' in op.tags():
             myqlm_program.reset(op.involved_qubits)
-        
         elif "PragmaLoop" in op.tags():
-            number_of_repetitions = max(0,int(op.repetitions().value))
+            number_of_repetitions = max(0, int(op.repetitions().value))
             for _ in range(number_of_repetitions):
                 for op_loop in op.circuit():
                     instructions = myqlm_call_operation(op_loop, qureg)
                     if instructions is not None:
                         myqlm_program.apply(*instructions)
                         if noise_mode_all_qubits:
-                            apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, instructions)
+                            apply_I_on_inactive_qubits(number_qubits,
+                                                       myqlm_program,
+                                                       qureg,
+                                                       instructions)
 
         else:
             instructions = myqlm_call_operation(op, qureg)
@@ -62,12 +64,12 @@ def myqlm_call_circuit(
                 if noise_mode_all_qubits:
                     apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, instructions)
 
-
     myqlm_circuit = myqlm_program.to_circ()
     return myqlm_circuit
 
-def apply_I_on_inactive_qubits(number_qubits: int, 
-                               myqlm_program: qlm.program.Program, 
+
+def apply_I_on_inactive_qubits(number_qubits: int,
+                               myqlm_program: qlm.program.Program,
                                qureg: qlm.bits.QRegister,
                                instructions: List) -> None:
     """Applies an I gate to all inactive qubits in a quantum circuit.
@@ -88,7 +90,6 @@ def apply_I_on_inactive_qubits(number_qubits: int,
     for qubit in range(number_qubits):
         if qubit not in active_qubits:
             myqlm_program.apply(qlm.I, qureg[qubit])
-
 
 
 def myqlm_call_operation(

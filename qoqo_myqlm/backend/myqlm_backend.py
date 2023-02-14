@@ -17,7 +17,8 @@ from typing import (
     List,
     Tuple,
     cast,
-    Any
+    Any,
+    Union
 )
 from qoqo_myqlm.interface import myqlm_call_circuit
 import numpy as np
@@ -40,7 +41,7 @@ class MyQLMBackend(object):
                  device: Optional[Any] = None,  # noqa
                  job_type: str = "SAMPLE",
                  observable: Optional[np.ndarray] = None,
-                 qpu: Any = None,
+                 qpu: Union[qat.linalg.qpu.LinAlg, qat.noisy.service.NoisyQProc] = None,
                  mode: str = "parallelization_blocks") -> None:  # noqa
         """Initialize MyQLM Backend
 
@@ -69,7 +70,7 @@ class MyQLMBackend(object):
         if qpu is None:
             qpu = get_default_qpu()
         self.qpu = qpu
-        self.all_qubits = True if mode=="all_qubits" else False
+        self.all_qubits = True if mode == "all_qubits" else False
 
         if job_type == "SAMPLE":
             if observable is not None:
