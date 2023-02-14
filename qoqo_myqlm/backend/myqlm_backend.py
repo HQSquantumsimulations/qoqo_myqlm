@@ -79,7 +79,8 @@ class MyQLMBackend(object):
         elif job_type == "OBS":
             if observable is None:
                 warnings.warn(
-                    "OBS job_type given without observable matrix, using Z on all qubits", stacklevel=2)
+                    "OBS job_type given without observable matrix, using Z on all qubits",
+                    stacklevel=2)
                 observable = np.array([[1, 0], [0, -1]])
             self.observable = observable
         else:

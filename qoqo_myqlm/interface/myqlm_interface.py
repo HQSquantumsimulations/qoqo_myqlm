@@ -79,12 +79,6 @@ def apply_I_on_inactive_qubits(number_qubits: int,
         myqlm_program : The QLM program to which to add the gate operations.
         qureg : The quantum register to which to apply the gate operations.
         instructions : A list of instructions specifying the active qubits.
-
-    Returns:
-        None: This function does not return anything.
-
-    Raises:
-        N/A
     """
     active_qubits = [int(qb.to_dict()['data']) for qb in instructions[1:]]
     for qubit in range(number_qubits):
