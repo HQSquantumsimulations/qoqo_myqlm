@@ -69,7 +69,7 @@ class MyQLMBackend(object):
         if qpu is None:
             qpu = get_default_qpu()
         self.qpu = qpu
-        self.all_qubts = True if mode=="all_qubits" else False
+        self.all_qubits = True if mode=="all_qubits" else False
 
         if job_type == "SAMPLE":
             if observable is not None:
@@ -124,7 +124,7 @@ class MyQLMBackend(object):
             if complex_def.is_output():
                 output_complex_register_dict[complex_def.name()] = cast(List[List[complex]], list())
 
-        compiled_circuit = myqlm_call_circuit(circuit, self.number_qubits, self.all_qubts)
+        compiled_circuit = myqlm_call_circuit(circuit, self.number_qubits, self.all_qubits)
 
         if self.observable is None:
             job = compiled_circuit.to_job(job_type='SAMPLE',

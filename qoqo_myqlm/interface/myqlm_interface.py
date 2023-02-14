@@ -19,12 +19,10 @@ from typing import (
 import qat.lang.AQASM as qlm
 
 
-
-
 def myqlm_call_circuit(
         circuit: Circuit,
         number_qubits: int,
-        all_qubits: bool = False,
+        noise_mode_all_qubits: bool = False,
         **kwargs) -> qlm.Program:
     """Translate the qoqo circuit into MyQLM ouput
 
@@ -52,26 +50,18 @@ def myqlm_call_circuit(
                     instructions = myqlm_call_operation(op_loop, qureg)
                     if instructions is not None:
                         myqlm_program.apply(*instructions)
-                        if all_qubits:
+                        if noise_mode_all_qubits:
                             apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op_loop, instructions)
 
         else:
             instructions = myqlm_call_operation(op, qureg)
             if instructions is not None:
                 myqlm_program.apply(*instructions)
-                if all_qubits:
+                if noise_mode_all_qubits:
                     apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op, instructions)
 
 
     myqlm_circuit = myqlm_program.to_circ()
-    # for op in circuit:
-    #     if 'PragmaLoop' in op.tags():
-    #         for op_loop in op.circuit():
-    #             print(op_loop)
-    #     else:
-    #         print(op)
-    # for op in myqlm_circuit.iterate_simple():
-    #    print(op)
     return myqlm_circuit
 
 def apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op_loop, instructions):
