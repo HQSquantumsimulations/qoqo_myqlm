@@ -74,12 +74,12 @@ class MyQLMBackend(object):
 
         if job_type == "SAMPLE":
             if observable is not None:
-                warnings.warn("SAMPLE job type given, ignoring the observable matrix")
+                warnings.warn("SAMPLE job type given, ignoring the observable matrix", stacklevel=2)
             self.observable = None
         elif job_type == "OBS":
             if observable is None:
                 warnings.warn(
-                    "OBS job_type given without observable matrix, using Z on all qubits")
+                    "OBS job_type given without observable matrix, using Z on all qubits", stacklevel=2)
                 observable = np.array([[1, 0], [0, -1]])
             self.observable = observable
         else:
