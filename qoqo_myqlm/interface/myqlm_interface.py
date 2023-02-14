@@ -32,6 +32,8 @@ def myqlm_call_circuit(
     Args:
         circuit: The qoqo circuit that is translated
         number_qubits: Number of qubits in the quantum register
+        noise_mode_all_qubits: boolean to indicate whether to apply noise to all qubits or only to
+                                 active qubits
         **kwargs: Additional keyword arguments
 
     Returns:
@@ -51,20 +53,37 @@ def myqlm_call_circuit(
                     if instructions is not None:
                         myqlm_program.apply(*instructions)
                         if noise_mode_all_qubits:
-                            apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op_loop, instructions)
+                            apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, instructions)
 
         else:
             instructions = myqlm_call_operation(op, qureg)
             if instructions is not None:
                 myqlm_program.apply(*instructions)
                 if noise_mode_all_qubits:
-                    apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op, instructions)
+                    apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, instructions)
 
 
     myqlm_circuit = myqlm_program.to_circ()
     return myqlm_circuit
 
-def apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, op_loop, instructions):
+def apply_I_on_inactive_qubits(number_qubits: int, 
+                               myqlm_program: qlm.program.Program, 
+                               qureg: qlm.bits.QRegister,
+                               instructions: List) -> None:
+    """Applies an I gate to all inactive qubits in a quantum circuit.
+
+    Args:
+        number_qubits: The total number of qubits in the circuit.
+        myqlm_program : The QLM program to which to add the gate operations.
+        qureg : The quantum register to which to apply the gate operations.
+        instructions : A list of instructions specifying the active qubits.
+
+    Returns:
+        None: This function does not return anything.
+
+    Raises:
+        N/A
+    """
     active_qubits = [int(qb.to_dict()['data']) for qb in instructions[1:]]
     for qubit in range(number_qubits):
         if qubit not in active_qubits:
