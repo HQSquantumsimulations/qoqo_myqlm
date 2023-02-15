@@ -41,7 +41,7 @@ class MyQLMBackend(object):
                  device: Optional[Any] = None,  # noqa
                  job_type: str = "SAMPLE",
                  observable: Optional[np.ndarray] = None,
-                 qpu: Union[qat.linalg.qpu.LinAlg, qat.noisy.service.NoisyQProc] = None,
+                 qpu: Any = None, # noqa
                  mode: str = "parallelization_blocks") -> None:  # noqa
         """Initialize MyQLM Backend
 
