@@ -17,8 +17,7 @@ from typing import (
     List,
     Tuple,
     cast,
-    Any,
-    Union
+    Any
 )
 from qoqo_myqlm.interface import myqlm_call_circuit
 import numpy as np
