@@ -40,7 +40,8 @@ class MyQLMBackend(object):
                  device: Optional[Any] = None,  # noqa
                  job_type: str = "SAMPLE",
                  observable: Optional[np.ndarray] = None,
-                 qpu: Any = None) -> None:  # noqa
+                 qpu: Any = None, # noqa
+                 mode: str = "parallelization_blocks") -> None:  # noqa
         """Initialize MyQLM Backend
 
         Args:
@@ -55,6 +56,7 @@ class MyQLMBackend(object):
             observable: if "OBS" is selected as the job type, this is the matrix of
                         the observable to measure.
             qpu: QPU machine to use (quantum processor or simulator) with relevant keywords
+            mode: noise mode, can be active_qubits_only, parallelization_blocks, all_qubits
 
         Raises:
             TypeError: Job_type specified is neither 'SAMPLE' nor 'OBS'
@@ -67,15 +69,17 @@ class MyQLMBackend(object):
         if qpu is None:
             qpu = get_default_qpu()
         self.qpu = qpu
+        self.all_qubits = True if mode == "all_qubits" else False
 
         if job_type == "SAMPLE":
             if observable is not None:
-                warnings.warn("SAMPLE job type given, ignoring the observable matrix")
+                warnings.warn("SAMPLE job type given, ignoring the observable matrix", stacklevel=2)
             self.observable = None
         elif job_type == "OBS":
             if observable is None:
                 warnings.warn(
-                    "OBS job_type given without observable matrix, using Z on all qubits")
+                    "OBS job_type given without observable matrix, using Z on all qubits",
+                    stacklevel=2)
                 observable = np.array([[1, 0], [0, -1]])
             self.observable = observable
         else:
@@ -121,7 +125,7 @@ class MyQLMBackend(object):
             if complex_def.is_output():
                 output_complex_register_dict[complex_def.name()] = cast(List[List[complex]], list())
 
-        compiled_circuit = myqlm_call_circuit(circuit, self.number_qubits)
+        compiled_circuit = myqlm_call_circuit(circuit, self.number_qubits, self.all_qubits)
 
         if self.observable is None:
             job = compiled_circuit.to_job(job_type='SAMPLE',
@@ -137,7 +141,7 @@ class MyQLMBackend(object):
         result = self.qpu.submit(job)
         for sample in result:
             array = [qubit_state for qubit_state in sample.state]
-            output_bit_register_dict['ro'].append(array)
+            output_bit_register_dict[list(output_bit_register_dict.keys())[0]].append(array)
 
         return output_bit_register_dict, output_float_register_dict, output_complex_register_dict
 
