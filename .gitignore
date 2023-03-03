@@ -5,3 +5,5 @@ target/*
 *.egg-info*
 doc/_build/*
 build/
+.vscode/
+dist/
