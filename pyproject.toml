@@ -4,13 +4,13 @@ version = "0.4.3"
 description = "An inteface to execute circuits from QOQO to MYQLM"
 authors = [{name="HQS Quantum Simulation GmbH", email="info@quantumsimulations.de"}]
 readme = "README.md"
-requires-python = ">3.8"
+#requires-python = ">3.8"
 dependencies = [
     "qoqo>=1.2",
+    'qoqo_calculator_pyo3>=1.1',
     "numpy",
     'myqlm',
-    'qoqo_calculator_pyo3>=1.1',
-    'qat-devices'
+    
 ]
 [project.optional-dependencies]
 tests = [
@@ -21,6 +21,7 @@ dev = [
     'flake8-bugbear',
     'flake8-pyproject',
     'flake8-pydocstyle',
+    'flake8-bandit',
     'darglint',
     'bandit',
     'mypy',
