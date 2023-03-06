@@ -5,7 +5,6 @@ on:
   pull_request:
     branches: ["main"]
 
-
 jobs:
   linting_python:
     uses: HQSquantumsimulations/reusable_workflows/.github/workflows/reusable_linting_pure_python.yml@main
@@ -14,37 +13,36 @@ jobs:
       linting_folder: "."
 
   unittests_python:
-      name: test_python_linux-${{ matrix.python.interpreter }}
-      runs-on: "ubuntu-latest"
-      strategy:
-        matrix:
-          python: [
-              {py: '3.8', interpreter: "python3.8"},
-              {py: '3.9', interpreter: "python3.9"},
-              {py: '3.10', interpreter: "python3.10"},
-              {py: '3.11', interpreter: "python3.11"},
-          ]
-      inputs:
-        python_folder:
-          description: 'Folder where python package is located'
-          default: '.'
-      steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-python@v2
-          with:
-            python-version: ${{ matrix.python.py }}
-            cache: 'pip'
-        - name: Install dependencies
-          run: |
-            pip install ${{inputs.python_folder}}/[tests]
-          working-directory: ${{inputs.python_folder}}
-        - name: Test with coverage pytest
-          if: ${{inputs.test_code_coverage}}
-          run: |
-            pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
-          working-directory: ${{inputs.python_folder}}
-        - name: Test without coverage pytest
-          if: ${{!inputs.test_code_coverage}}
-          run: |
-            pytest tests/
-          working-directory: ${{inputs.python_folder}}
+    name: test_python_linux-${{ matrix.python.interpreter }}
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-interpreter: ['python3.8', 'python3.9', 'python3.10', 'python3.11']
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python.py }}
+          cache: 'pip'
+      - name: Install dependencies
+        run: |
+          pip install ${{inputs.python_folder}}/[tests]
+        working-directory: ${{inputs.python_folder}}
+        env:
+          python_folder: ${{ github.workspace }}
+      - name: Test with coverage pytest
+        if: ${{inputs.test_code_coverage}}
+        run: |
+          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+        working-directory: ${{inputs.python_folder}}
+        env:
+          python_folder: ${{ github.workspace }}
+      - name: Test without coverage pytest
+        if: ${{!inputs.test_code_coverage}}
+        run: |
+          pytest tests/
+        working-directory: ${{inputs.python_folder}}
+        env:
+          python_folder: ${{ github.workspace }}
+
