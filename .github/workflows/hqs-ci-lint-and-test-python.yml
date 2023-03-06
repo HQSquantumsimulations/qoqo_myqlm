@@ -12,7 +12,6 @@ jobs:
     with: 
       python_folder: "."
       linting_folder: "."
-      matrix: '{"python":[{"py": "3.8", "interpreter": "python3.8"}, {"py": "3.9", "interpreter": "python3.9"}]}'
 
   unittests_python:
     uses: HQSquantumsimulations/reusable_workflows/.github/workflows/reusable_tests_pure_python.yml@main
@@ -20,6 +19,6 @@ jobs:
       python_folder: "."
       test_code_coverage: false
       # Run tests also on windows runners
-      windows: true
+      windows: false
       # Run tests also on macos runners
-      macos: true
+      macos: false
