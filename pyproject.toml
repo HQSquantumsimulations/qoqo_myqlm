@@ -6,10 +6,10 @@ authors = [{name="HQS Quantum Simulation GmbH", email="info@quantumsimulations.d
 readme = "README.md"
 requires-python = ">3.8"
 dependencies = [
-    "qoqo>=1.0.0",
+    "qoqo>=1.2",
     "numpy",
     'myqlm',
-    'qoqo_calculator_pyo3>=1.0.0',
+    'qoqo_calculator_pyo3>=1.1',
 ]
 [project.optional-dependencies]
 tests = [
