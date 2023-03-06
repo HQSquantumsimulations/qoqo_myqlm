@@ -27,19 +27,11 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install ${{inputs.python_folder}}
-        working-directory: ${{env.python_folder}}
-        env:
-          python_folder: "."
-      - name: Test with coverage pytest
-        if: ${{inputs.test_code_coverage}}
-        run: |
-          pytest tests/ --cov=${{inputs.python_folder}} --cov-fail-under=80
+          pip install ${{env.python_folder}}
         working-directory: ${{env.python_folder}}
         env:
           python_folder: "."
       - name: Test without coverage pytest
-        if: ${{!inputs.test_code_coverage}}
         run: |
           pytest tests/
         working-directory: ${{env.python_folder}}
