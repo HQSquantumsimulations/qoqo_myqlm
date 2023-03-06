@@ -27,9 +27,7 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pwd
-          ls
-          pip install .[tests]
+          pip install ./[tests]
       - name: Test without coverage pytest
         run: |
           cd ${{env.python_folder}}
