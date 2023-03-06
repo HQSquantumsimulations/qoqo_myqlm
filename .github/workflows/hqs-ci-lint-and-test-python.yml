@@ -27,6 +27,7 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
+          pwd
           pip install ${{env.python_folder}}/[tests]
         working-directory: ${{env.python_folder}}
         env:
