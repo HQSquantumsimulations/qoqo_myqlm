@@ -28,10 +28,8 @@ jobs:
       - name: Install dependencies
         run: |
           pwd
-          pip install ${{env.python_folder}}/[tests]
-        working-directory: ${{env.python_folder}}
-        env:
-          python_folder: "."
+          ls
+          pip install .[tests]
       - name: Test without coverage pytest
         run: |
           cd ${{env.python_folder}}
