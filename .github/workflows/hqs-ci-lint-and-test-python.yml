@@ -10,14 +10,14 @@ jobs:
     uses: HQSquantumsimulations/reusable_workflows/.github/workflows/reusable_linting_pure_python.yml@main
     with: 
       python_folder: "."
-      linting_folder: "."
+      linting_folder: "qoqo_myqlm"
 
   unittests_python:
     name: test_python_linux-python${{ matrix.python-version }}
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11']
+        python-version: ['3.8','3.9', '3.10']
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v2
