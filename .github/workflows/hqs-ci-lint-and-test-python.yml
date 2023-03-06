@@ -10,13 +10,13 @@ jobs:
   linting_python:
     uses: HQSquantumsimulations/reusable_workflows/.github/workflows/reusable_linting_pure_python.yml@main
     with: 
-      python_folder: "qoqo_myqlm"
-      linting_folder: "qoqo_myqlm"
+      python_folder: "."
+      linting_folder: "."
 
   unittests_python:
     uses: HQSquantumsimulations/reusable_workflows/.github/workflows/reusable_tests_pure_python.yml@main
     with: 
-      python_folder: "qoqo_myqlm"
+      python_folder: "."
       test_code_coverage: false
       # Run tests also on windows runners
       windows: true
