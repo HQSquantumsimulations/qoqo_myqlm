@@ -9,7 +9,7 @@ dependencies = [
     "qoqo>=1.2",
     'qoqo_calculator_pyo3>=1.1',
     "numpy",
-    'myqlm',
+    'myqlm>=1.7.1',
     
 ]
 [project.optional-dependencies]
