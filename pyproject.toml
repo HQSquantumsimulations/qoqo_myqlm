@@ -29,8 +29,6 @@ dev = [
 [build-system]
 requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
-# requires = ["poetry-core"]
-# build-backend = "poetry.core.masonry.api"
 
 
 [tool.flake8]
