@@ -13,7 +13,7 @@ jobs:
       linting_folder: "."
 
   unittests_python:
-    name: test_python_linux-python${{ matrix.python-interpreter }}
+    name: test_python_linux-python${{ matrix.python-version }}
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
