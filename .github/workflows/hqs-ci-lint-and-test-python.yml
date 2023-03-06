@@ -27,12 +27,13 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: |
-          pip install ${{env.python_folder}}
+          pip install ${{env.python_folder}}/[tests]
         working-directory: ${{env.python_folder}}
         env:
           python_folder: "."
       - name: Test without coverage pytest
         run: |
+          cd ${{env.python_folder}}
           pytest tests/
         working-directory: ${{env.python_folder}}
         env:
