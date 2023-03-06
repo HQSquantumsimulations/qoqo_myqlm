@@ -22,7 +22,6 @@ and Creates a MyQLM file with MyQLMBackend.
 # is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
-from qoqo_myqlm.__version__ import __version__
 from qoqo_myqlm.interface import (
     myqlm_call_operation,
     myqlm_call_circuit
@@ -31,4 +30,4 @@ from qoqo_myqlm.backend import (
     MyQLMBackend,
 )
 
-__all__ = ('__version__', 'myqlm_call_operation', 'myqlm_call_circuit', 'MyQLMBackend')
+__all__ = ('myqlm_call_operation', 'myqlm_call_circuit', 'MyQLMBackend')
