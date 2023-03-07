@@ -11,14 +11,7 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 from qoqo import Circuit
-from typing import (
-    Optional,
-    Dict,
-    List,
-    Tuple,
-    cast,
-    Any
-)
+from typing import Optional, Dict, List, Tuple, cast, Any
 from qoqo_myqlm.interface import myqlm_call_circuit
 import numpy as np
 import warnings
@@ -34,14 +27,16 @@ class MyQLMBackend(object):
     interface.
     """
 
-    def __init__(self,
-                 number_qubits: int = 1,
-                 number_measurements: int = 1,
-                 device: Optional[Any] = None,  # noqa
-                 job_type: str = "SAMPLE",
-                 observable: Optional[np.ndarray] = None,
-                 qpu: Any = None, # noqa
-                 mode: str = "parallelization_blocks") -> None:  # noqa
+    def __init__(
+        self,
+        number_qubits: int = 1,
+        number_measurements: int = 1,
+        device: Optional[Any] = None,  # noqa
+        job_type: str = "SAMPLE",
+        observable: Optional[np.ndarray] = None,
+        qpu: Any = None,  # noqa
+        mode: str = "parallelization_blocks",
+    ) -> None:  # noqa
         """Initialize MyQLM Backend
 
         Args:
@@ -73,22 +68,29 @@ class MyQLMBackend(object):
 
         if job_type == "SAMPLE":
             if observable is not None:
-                warnings.warn("SAMPLE job type given, ignoring the observable matrix", stacklevel=2)
+                warnings.warn(
+                    "SAMPLE job type given, ignoring the observable matrix",
+                    stacklevel=2,
+                )
             self.observable = None
         elif job_type == "OBS":
             if observable is None:
                 warnings.warn(
                     "OBS job_type given without observable matrix, using Z on all qubits",
-                    stacklevel=2)
+                    stacklevel=2,
+                )
                 observable = np.array([[1, 0], [0, -1]])
             self.observable = observable
         else:
             raise TypeError("Job_type specified is neither 'SAMPLE' nor 'OBS'")
 
-    def run_circuit(self, circuit: Circuit
-                    ) -> Tuple[Dict[str, List[List[bool]]],
-                               Dict[str, List[List[float]]],
-                               Dict[str, List[List[complex]]]]:
+    def run_circuit(
+        self, circuit: Circuit
+    ) -> Tuple[
+        Dict[str, List[List[bool]]],
+        Dict[str, List[List[float]]],
+        Dict[str, List[List[complex]]],
+    ]:
         """Turn the circuit into MyQLM and save to file
 
         Args:
@@ -109,46 +111,69 @@ class MyQLMBackend(object):
         output_complex_register_dict: Dict[str, List[List[complex]]] = dict()
 
         for bit_def in circuit.filter_by_tag("DefinitionBit"):
-            internal_bit_register_dict[bit_def.name()] = [False for _ in range(bit_def.length())]
+            internal_bit_register_dict[bit_def.name()] = [
+                False for _ in range(bit_def.length())
+            ]
             if bit_def.is_output():
                 output_bit_register_dict[bit_def.name()] = list()
 
         for float_def in circuit.filter_by_tag("DefinitionFloat"):
             internal_float_register_dict[float_def.name()] = [
-                0.0 for _ in range(float_def.length())]
+                0.0 for _ in range(float_def.length())
+            ]
             if float_def.is_output():
-                output_float_register_dict[float_def.name()] = cast(List[List[float]], list())
+                output_float_register_dict[float_def.name()] = cast(
+                    List[List[float]], list()
+                )
 
         for complex_def in circuit.filter_by_tag("DefinitionComplex"):
             internal_complex_register_dict[complex_def.name()] = [
-                complex(0.0) for _ in range(complex_def.length())]
+                complex(0.0) for _ in range(complex_def.length())
+            ]
             if complex_def.is_output():
-                output_complex_register_dict[complex_def.name()] = cast(List[List[complex]], list())
+                output_complex_register_dict[complex_def.name()] = cast(
+                    List[List[complex]], list()
+                )
 
-        compiled_circuit = myqlm_call_circuit(circuit, self.number_qubits, self.all_qubits)
+        compiled_circuit = myqlm_call_circuit(
+            circuit, self.number_qubits, self.all_qubits
+        )
 
         if self.observable is None:
-            job = compiled_circuit.to_job(job_type='SAMPLE',
-                                          nbshots=self.number_measurements,
-                                          aggregate_data=False)
+            job = compiled_circuit.to_job(
+                job_type="SAMPLE",
+                nbshots=self.number_measurements,
+                aggregate_data=False,
+            )
         else:
             obs = qat.core.Observable(nqbits=self.number_qubits, matrix=self.observable)
-            job = compiled_circuit.to_job(job_type='OBS',
-                                          nbshots=self.number_measurements,
-                                          observable=obs,
-                                          aggregate_data=False)
+            job = compiled_circuit.to_job(
+                job_type="OBS",
+                nbshots=self.number_measurements,
+                observable=obs,
+                aggregate_data=False,
+            )
 
         result = self.qpu.submit(job)
         for sample in result:
             array = [qubit_state for qubit_state in sample.state]
-            output_bit_register_dict[list(output_bit_register_dict.keys())[0]].append(array)
+            output_bit_register_dict[list(output_bit_register_dict.keys())[0]].append(
+                array
+            )
 
-        return output_bit_register_dict, output_float_register_dict, output_complex_register_dict
+        return (
+            output_bit_register_dict,
+            output_float_register_dict,
+            output_complex_register_dict,
+        )
 
-    def run_measurement_registers(self, measurement: Any  # noqa
-                                  ) -> Tuple[Dict[str, List[List[bool]]],
-                                             Dict[str, List[List[float]]],
-                                             Dict[str, List[List[complex]]]]:
+    def run_measurement_registers(
+        self, measurement: Any  # noqa
+    ) -> Tuple[
+        Dict[str, List[List[bool]]],
+        Dict[str, List[List[float]]],
+        Dict[str, List[List[complex]]],
+    ]:
         """Run all circuits of a measurement with the PyQuEST backend
 
         Args:
@@ -169,21 +194,21 @@ class MyQLMBackend(object):
             else:
                 run_circuit = constant_circuit + circuit
 
-            (tmp_bit_register_dict,
-             tmp_float_register_dict,
-             tmp_complex_register_dict) = self.run_circuit(
-                run_circuit
-            )
+            (
+                tmp_bit_register_dict,
+                tmp_float_register_dict,
+                tmp_complex_register_dict,
+            ) = self.run_circuit(run_circuit)
             output_bit_register_dict.update(tmp_bit_register_dict)
             output_float_register_dict.update(tmp_float_register_dict)
             output_complex_register_dict.update(tmp_complex_register_dict)
         return (
             output_bit_register_dict,
             output_float_register_dict,
-            output_complex_register_dict)
+            output_complex_register_dict,
+        )
 
-    def run_measurement(self, measurement: Any  # noqa
-                        ) -> Optional[Dict[str, float]]:
+    def run_measurement(self, measurement: Any) -> Optional[Dict[str, float]]:  # noqa
         """Run a circuit with the PyQuEST backend
 
         Args:
@@ -192,10 +217,13 @@ class MyQLMBackend(object):
         Returns:
             Optional[Dict[str, float]]
         """
-        (output_bit_register_dict,
+        (
+            output_bit_register_dict,
             output_float_register_dict,
-            output_complex_register_dict) = self.run_measurement_registers(measurement)
+            output_complex_register_dict,
+        ) = self.run_measurement_registers(measurement)
         return measurement.evaluate(
             output_bit_register_dict,
             output_float_register_dict,
-            output_complex_register_dict)
+            output_complex_register_dict,
+        )

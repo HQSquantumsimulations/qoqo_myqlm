@@ -1,0 +1,37 @@
+name: HQS CI tests for pure python repos
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  linting_python:
+    uses: HQSquantumsimulations/reusable_workflows/.github/workflows/reusable_linting_pure_python.yml@main
+    with: 
+      python_folder: "."
+      linting_folder: "qoqo_myqlm"
+
+  unittests_python:
+    name: test_python_linux-python${{ matrix.python-version }}
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        python-version: ['3.8','3.9', '3.10']
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+      - name: Install dependencies
+        run: |
+          pip install ./[tests]
+      - name: Test without coverage pytest
+        run: |
+          cd ${{env.python_folder}}
+          pytest tests/
+        working-directory: ${{env.python_folder}}
+        env:
+          python_folder: "."
+
