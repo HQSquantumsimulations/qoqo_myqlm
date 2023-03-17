@@ -17,7 +17,7 @@ import numpy as np
 import warnings
 import qat
 from qat.qpus import get_default_qpu
-
+import time
 
 class MyQLMBackend(object):
     r"""Backend to qoqo that produces MyQLM output which can be imported.
@@ -35,7 +35,8 @@ class MyQLMBackend(object):
         job_type: str = "SAMPLE",
         observable: Optional[np.ndarray] = None,
         qpu: Any = None,  # noqa
-        mode: str = "parallelization_blocks",
+        mode: str = "active_qubits_only",
+        time_QLM_submission: bool = False,
     ) -> None:  # noqa
         """Initialize MyQLM Backend
 
@@ -61,6 +62,7 @@ class MyQLMBackend(object):
         self.number_measurements = number_measurements
         self.device = device
         self.job_type = job_type
+        self._timing_qlm = time_QLM_submission
         if qpu is None:
             qpu = get_default_qpu()
         self.qpu = qpu
@@ -153,8 +155,12 @@ class MyQLMBackend(object):
                 observable=obs,
                 aggregate_data=False,
             )
-
+        start_time = time.time()
         result = self.qpu.submit(job)
+        end_time = time.time()
+        if self._timing_qlm:
+            print(f"Elapsed time (QLM job submission): {end_time - start_time:.2f} seconds")
+
         for sample in result:
             array = [qubit_state for qubit_state in sample.state]
             output_bit_register_dict[list(output_bit_register_dict.keys())[0]].append(
