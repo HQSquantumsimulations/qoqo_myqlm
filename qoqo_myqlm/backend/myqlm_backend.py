@@ -161,7 +161,9 @@ class MyQLMBackend(object):
         result = self.qpu.submit(job)
         end_time = time.time()
         if self._timing_qlm:
-            print(f"Elapsed time (QLM job submission): {end_time - start_time:.2f} seconds")
+            print(
+                f"Elapsed time (QLM job submission): {end_time - start_time:.2f} seconds"
+            )
 
         for sample in result:
             array = [qubit_state for qubit_state in sample.state]
