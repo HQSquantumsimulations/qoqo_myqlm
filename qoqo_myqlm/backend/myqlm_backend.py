@@ -19,6 +19,7 @@ import qat
 from qat.qpus import get_default_qpu
 import time
 
+
 class MyQLMBackend(object):
     r"""Backend to qoqo that produces MyQLM output which can be imported.
 
