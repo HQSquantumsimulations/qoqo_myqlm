@@ -10,5 +10,5 @@ jobs:
   deploy_pypi:
     uses: HQSquantumsimulations/reusable_workflows/.github/workflows/reusable_build_pure_python.yml@main
     with: 
-      python_folder: ""
+      python_folder: "./"
     secrets: inherit
