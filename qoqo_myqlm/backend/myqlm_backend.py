@@ -53,6 +53,7 @@ class MyQLMBackend(object):
                         the observable to measure.
             qpu: QPU machine to use (quantum processor or simulator) with relevant keywords
             mode: noise mode, can be active_qubits_only, parallelization_blocks, all_qubits
+            time_QLM_submission: toggle the print of the timing for the job submission to QLM
 
         Raises:
             TypeError: Job_type specified is neither 'SAMPLE' nor 'OBS'
