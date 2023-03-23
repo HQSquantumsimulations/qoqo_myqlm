@@ -11,32 +11,51 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 from qoqo import Circuit
-from typing import (
-    cast,
-    List,
-    Any
-)
+from typing import cast, List, Any
 import time
 import qat.lang.AQASM as qlm
 import numpy as np
 
+
 def VariableMSXX(theta: float):
-    return np.array([[np.cos(theta/2), 0, 0, -1j*np.sin(theta/2)],
-                      [0, np.cos(theta/2), -1j*np.sin(theta/2), 0],
-                      [0, -1j*np.sin(theta/2), np.cos(theta/2), 0],
-                      [-1j*np.sin(theta/2), 0, 0, np.cos(theta/2)]])
+    """
+    Returns a 4x4 numpy array that represents the variable Molmer-Sorensen gate with an XX interaction.
+
+    Args:
+    theta : float
+        The angle parameter for the gate, in radians.
+
+    Returns:
+    np.ndarray
+        A 4x4 numpy array that represents the variable Molmer-Sorensen gate with an XX interaction.
+    """
+    return np.array(
+        [
+            [np.cos(theta / 2), 0, 0, -1j * np.sin(theta / 2)],
+            [0, np.cos(theta / 2), -1j * np.sin(theta / 2), 0],
+            [0, -1j * np.sin(theta / 2), np.cos(theta / 2), 0],
+            [-1j * np.sin(theta / 2), 0, 0, np.cos(theta / 2)],
+        ]
+    )
+
 
 def MolmerSorensenXX():
-    return np.array([[1, 0, 0, -1j],
-                  [0, 1, -1j, 0],
-                  [0, -1j, 1, 0],
-                  [-1j, 0, 0, 1]]) / np.sqrt(2)
+    """
+    Returns a 4x4 numpy array that represents the Molmer-Sorensen gate with an XX interaction.
+
+    Returns:
+    --------
+    np.ndarray
+        A 4x4 numpy array that represents the Molmer-Sorensen gate with an XX interaction.
+    """
+    return np.array(
+        [[1, 0, 0, -1j], [0, 1, -1j, 0], [0, -1j, 1, 0], [-1j, 0, 0, 1]]
+    ) / np.sqrt(2)
+
 
 def myqlm_call_circuit(
-        circuit: Circuit,
-        number_qubits: int,
-        noise_mode_all_qubits: bool = False,
-        **kwargs) -> qlm.Program:
+    circuit: Circuit, number_qubits: int, noise_mode_all_qubits: bool = False, **kwargs
+) -> qlm.Program:
     """Translate the qoqo circuit into MyQLM ouput
 
     The qoqo_myqlm interface iterates through the qoqo circuit and translates each qoqo operation
@@ -56,20 +75,22 @@ def myqlm_call_circuit(
     qureg = myqlm_program.qalloc(number_qubits)
     start_time = time.time()
     for op in circuit:
-        if 'PragmaActiveReset' in op.tags():
+        if "PragmaActiveReset" in op.tags():
             myqlm_program.reset(op.involved_qubits)
-        
+
         elif "PragmaLoop" in op.tags():
             # routine = qlm.QRoutine()
-            number_of_repetitions = max(0,int(op.repetitions().value))
+            number_of_repetitions = max(0, int(op.repetitions().value))
             for _ in range(number_of_repetitions):
                 for op_loop in op.circuit():
                     instructions = myqlm_call_operation(op_loop, qureg)
                     if instructions is not None:
                         myqlm_program.apply(*instructions)
                         if noise_mode_all_qubits:
-                            apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, instructions)
-                 
+                            apply_I_on_inactive_qubits(
+                                number_qubits, myqlm_program, qureg, instructions
+                            )
+
             # for op_loop in op.circuit():
             #     instructions = myqlm_call_operation(op_loop, qureg)
             #     if instructions is not None:
@@ -78,16 +99,15 @@ def myqlm_call_circuit(
             #             apply_I_on_inactive_qubits(number_qubits, routine, qureg, instructions)
             # for _ in range(number_of_repetitions):
             #     myqlm_program.apply(routine,qureg)
-                    
-                    
 
         else:
             instructions = myqlm_call_operation(op, qureg)
             if instructions is not None:
                 myqlm_program.apply(*instructions)
                 if noise_mode_all_qubits:
-                    apply_I_on_inactive_qubits(number_qubits, myqlm_program, qureg, instructions)
-
+                    apply_I_on_inactive_qubits(
+                        number_qubits, myqlm_program, qureg, instructions
+                    )
 
     end_time = time.time()
     elapsed_time = end_time - start_time
@@ -95,10 +115,13 @@ def myqlm_call_circuit(
     myqlm_circuit = myqlm_program.to_circ()
     return myqlm_circuit
 
-def apply_I_on_inactive_qubits(number_qubits: int, 
-                               myqlm_program: qlm.program.Program, 
-                               qureg: qlm.bits.QRegister,
-                               instructions: List) -> None:
+
+def apply_I_on_inactive_qubits(
+    number_qubits: int,
+    myqlm_program: qlm.program.Program,
+    qureg: qlm.bits.QRegister,
+    instructions: List,
+) -> None:
     """Applies an I gate to all inactive qubits in a quantum circuit.
 
     Args:
@@ -113,16 +136,13 @@ def apply_I_on_inactive_qubits(number_qubits: int,
     Raises:
         N/A
     """
-    active_qubits = [int(qb.to_dict()['data']) for qb in instructions[1:]]
+    active_qubits = [int(qb.to_dict()["data"]) for qb in instructions[1:]]
     for qubit in range(number_qubits):
         if qubit not in active_qubits:
             myqlm_program.apply(qlm.I, qureg[qubit])
 
 
-
-def myqlm_call_operation(
-        operation: Any,  # noqa
-        qureg: qlm.Program.qalloc) -> List:
+def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # noqa
     """Translate a qoqo operation to MyQLM text
 
     Args:
@@ -137,69 +157,77 @@ def myqlm_call_operation(
     """
     op = cast(List, None)
     tags = operation.tags()
-    if 'RotateZ' in tags:
+    if "RotateZ" in tags:
         op = [qlm.RZ(operation.theta().float()), qureg[operation.qubit()]]
-    elif 'RotateX' in tags:
+    elif "RotateX" in tags:
         op = [qlm.RX(operation.theta().float()), qureg[operation.qubit()]]
-    elif 'RotateY' in tags:
+    elif "RotateY" in tags:
         op = [qlm.RY(operation.theta().float()), qureg[operation.qubit()]]
-    elif 'CNOT' in tags:
+    elif "CNOT" in tags:
         op = [qlm.CNOT, qureg[operation.control()], qureg[operation.target()]]
-    elif 'Hadamard' in tags:
+    elif "Hadamard" in tags:
         op = [qlm.H, qureg[operation.qubit()]]
-    elif 'PauliX' in tags:
+    elif "PauliX" in tags:
         op = [qlm.X, qureg[operation.qubit()]]
-    elif 'PauliY' in tags:
+    elif "PauliY" in tags:
         op = [qlm.Y, qureg[operation.qubit()]]
-    elif 'PauliZ' in tags:
+    elif "PauliZ" in tags:
         op = [qlm.Z, qureg[operation.qubit()]]
-    elif 'SGate' in tags:
+    elif "SGate" in tags:
         op = [qlm.S, qureg[operation.qubit()]]
-    elif 'TGate' in tags:
+    elif "TGate" in tags:
         op = [qlm.T, qureg[operation.qubit()]]
-    elif 'ControlledPauliZ' in tags:
+    elif "ControlledPauliZ" in tags:
         op = [qlm.CSIGN, qureg[operation.control()], qureg[operation.target()]]
-    elif 'ControlledPauliY' in tags:
+    elif "ControlledPauliY" in tags:
         op = [qlm.Y.ctrl(), qureg[operation.control()], qureg[operation.target()]]
-    elif 'SWAP' in tags:
+    elif "SWAP" in tags:
         op = [qlm.SWAP, qureg[operation.control()], qureg[operation.target()]]
-    elif 'ISwap' in tags:
+    elif "ISwap" in tags:
         op = [qlm.ISWAP, qureg[operation.control()], qureg[operation.target()]]
-    elif 'VariableMSXX' in tags:
-        vmsxx = qlm.AbstractGate("VariableMSXX", [float], matrix_generator=VariableMSXX, arity=2)
-        op = [vmsxx(operation.theta().float()), qureg[operation.control()], qureg[operation.target()]]
-    elif 'MolmerSorensenXX' in tags:
-        msxx = qlm.AbstractGate("MolmerSorensenXX", [], matrix_generator=MolmerSorensenXX, arity=2)
+    elif "VariableMSXX" in tags:
+        vmsxx = qlm.AbstractGate(
+            "VariableMSXX", [float], matrix_generator=VariableMSXX, arity=2
+        )
+        op = [
+            vmsxx(operation.theta().float()),
+            qureg[operation.control()],
+            qureg[operation.target()],
+        ]
+    elif "MolmerSorensenXX" in tags:
+        msxx = qlm.AbstractGate(
+            "MolmerSorensenXX", [], matrix_generator=MolmerSorensenXX, arity=2
+        )
         op = [msxx(), qureg[operation.control()], qureg[operation.target()]]
-    elif 'SingleQubitGate' in tags:
+    elif "SingleQubitGate" in tags:
         matrix = operation.unitary_matrix()
         gate = qlm.AbstractGate("Gate", [], arity=1, matrix_generator=matrix)
         op = [gate(), qureg[operation.qubit()]]
-    elif 'SingleQubitGateOperation' in tags:
+    elif "SingleQubitGateOperation" in tags:
         matrix = operation.unitary_matrix()
         gate = qlm.AbstractGate("Gate", [], arity=1, matrix_generator=matrix)
         op = [gate(), qureg[operation.qubit()]]
-    elif 'TwoQubitGateOperation' in tags:
+    elif "TwoQubitGateOperation" in tags:
         matrix = operation.unitary_matrix()
         gate = qlm.AbstractGate("Gate", [], arity=2, matrix_generator=matrix)
         op = [gate(), qureg[operation.control()], qureg[operation.target()]]
-    elif 'MeasureQubit' in tags:
+    elif "MeasureQubit" in tags:
         pass
-    elif 'Definition' in tags:
+    elif "Definition" in tags:
         pass
-    elif 'PragmaRepeatedMeasurement' in tags:
+    elif "PragmaRepeatedMeasurement" in tags:
         pass
-    elif 'PragmaSetNumberOfMeasurements' in tags:
+    elif "PragmaSetNumberOfMeasurements" in tags:
         pass
-    elif 'PragmaStartDecompositionBlock' in tags:
+    elif "PragmaStartDecompositionBlock" in tags:
         pass
-    elif 'PragmaGlobalPhase' in tags:
+    elif "PragmaGlobalPhase" in tags:
         pass
-    elif 'PragmaStopDecompositionBlock' in tags:
+    elif "PragmaStopDecompositionBlock" in tags:
         pass
-    elif 'PragmaStopParallelBlock' in tags:
+    elif "PragmaStopParallelBlock" in tags:
         pass
     else:
-        raise RuntimeError(f'Operation not in MyQLM backend tags={tags}')
+        raise RuntimeError(f"Operation not in MyQLM backend tags={tags}")
 
     return op
