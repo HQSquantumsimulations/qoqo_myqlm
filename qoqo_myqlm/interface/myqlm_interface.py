@@ -38,9 +38,7 @@ def myqlm_call_circuit(
     for op in circuit:
         if "PragmaActiveReset" in op.tags():
             myqlm_program.reset(op.involved_qubits)
-
         elif "PragmaLoop" in op.tags():
-            # routine = qlm.QRoutine()
             number_of_repetitions = max(0, int(op.repetitions().value))
             for _ in range(number_of_repetitions):
                 for op_loop in op.circuit():
