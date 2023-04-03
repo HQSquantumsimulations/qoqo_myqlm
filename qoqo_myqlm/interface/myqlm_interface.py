@@ -12,9 +12,7 @@
 # the License.
 from qoqo import Circuit
 from typing import cast, List, Any
-import time
 import qat.lang.AQASM as qlm
-import numpy as np
 
 
 def myqlm_call_circuit(
@@ -53,14 +51,6 @@ def myqlm_call_circuit(
                             apply_I_on_inactive_qubits(
                                 number_qubits, myqlm_program, qureg, instructions
                             )
-            # for op_loop in op.circuit():
-            #     instructions = myqlm_call_operation(op_loop, qureg)
-            #     if instructions is not None:
-            #         routine.apply(*instructions)
-            #         if noise_mode_all_qubits:
-            #             apply_I_on_inactive_qubits(number_qubits, routine, qureg, instructions)
-            # for _ in range(number_of_repetitions):
-            #     myqlm_program.apply(routine,qureg)
         else:
             instructions = myqlm_call_operation(op, qureg)
             if instructions is not None:
