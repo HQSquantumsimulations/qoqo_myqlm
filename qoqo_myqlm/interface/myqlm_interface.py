@@ -17,42 +17,6 @@ import qat.lang.AQASM as qlm
 import numpy as np
 
 
-def VariableMSXX(theta: float):
-    """
-    Returns a 4x4 numpy array that represents the variable Molmer-Sorensen gate with an XX interaction.
-
-    Args:
-    theta : float
-        The angle parameter for the gate, in radians.
-
-    Returns:
-    np.ndarray
-        A 4x4 numpy array that represents the variable Molmer-Sorensen gate with an XX interaction.
-    """
-    return np.array(
-        [
-            [np.cos(theta / 2), 0, 0, -1j * np.sin(theta / 2)],
-            [0, np.cos(theta / 2), -1j * np.sin(theta / 2), 0],
-            [0, -1j * np.sin(theta / 2), np.cos(theta / 2), 0],
-            [-1j * np.sin(theta / 2), 0, 0, np.cos(theta / 2)],
-        ]
-    )
-
-
-def MolmerSorensenXX():
-    """
-    Returns a 4x4 numpy array that represents the Molmer-Sorensen gate with an XX interaction.
-
-    Returns:
-    --------
-    np.ndarray
-        A 4x4 numpy array that represents the Molmer-Sorensen gate with an XX interaction.
-    """
-    return np.array(
-        [[1, 0, 0, -1j], [0, 1, -1j, 0], [0, -1j, 1, 0], [-1j, 0, 0, 1]]
-    ) / np.sqrt(2)
-
-
 def myqlm_call_circuit(
     circuit: Circuit, number_qubits: int, noise_mode_all_qubits: bool = False, **kwargs
 ) -> qlm.Program:
@@ -73,7 +37,6 @@ def myqlm_call_circuit(
     """
     myqlm_program = qlm.Program()
     qureg = myqlm_program.qalloc(number_qubits)
-    start_time = time.time()
     for op in circuit:
         if "PragmaActiveReset" in op.tags():
             myqlm_program.reset(op.involved_qubits)
@@ -90,7 +53,6 @@ def myqlm_call_circuit(
                             apply_I_on_inactive_qubits(
                                 number_qubits, myqlm_program, qureg, instructions
                             )
-
             # for op_loop in op.circuit():
             #     instructions = myqlm_call_operation(op_loop, qureg)
             #     if instructions is not None:
@@ -99,7 +61,6 @@ def myqlm_call_circuit(
             #             apply_I_on_inactive_qubits(number_qubits, routine, qureg, instructions)
             # for _ in range(number_of_repetitions):
             #     myqlm_program.apply(routine,qureg)
-
         else:
             instructions = myqlm_call_operation(op, qureg)
             if instructions is not None:
@@ -108,9 +69,6 @@ def myqlm_call_circuit(
                     apply_I_on_inactive_qubits(
                         number_qubits, myqlm_program, qureg, instructions
                     )
-
-    end_time = time.time()
-    elapsed_time = end_time - start_time
 
     myqlm_circuit = myqlm_program.to_circ()
     return myqlm_circuit
@@ -185,31 +143,17 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
         op = [qlm.SWAP, qureg[operation.control()], qureg[operation.target()]]
     elif "ISwap" in tags:
         op = [qlm.ISWAP, qureg[operation.control()], qureg[operation.target()]]
-    elif "VariableMSXX" in tags:
-        vmsxx = qlm.AbstractGate(
-            "VariableMSXX", [float], matrix_generator=VariableMSXX, arity=2
-        )
-        op = [
-            vmsxx(operation.theta().float()),
-            qureg[operation.control()],
-            qureg[operation.target()],
-        ]
-    elif "MolmerSorensenXX" in tags:
-        msxx = qlm.AbstractGate(
-            "MolmerSorensenXX", [], matrix_generator=MolmerSorensenXX, arity=2
-        )
-        op = [msxx(), qureg[operation.control()], qureg[operation.target()]]
     elif "SingleQubitGate" in tags:
         matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate("Gate", [], arity=1, matrix_generator=matrix)
+        gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.qubit()]]
     elif "SingleQubitGateOperation" in tags:
         matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate("Gate", [], arity=1, matrix_generator=matrix)
+        gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.qubit()]]
     elif "TwoQubitGateOperation" in tags:
         matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate("Gate", [], arity=2, matrix_generator=matrix)
+        gate = qlm.AbstractGate(tags[-1], [], arity=2, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.control()], qureg[operation.target()]]
     elif "MeasureQubit" in tags:
         pass
