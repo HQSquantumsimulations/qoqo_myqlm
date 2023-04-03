@@ -49,7 +49,6 @@ def myqlm_call_circuit(
                             apply_I_on_inactive_qubits(
                                 number_qubits, myqlm_program, qureg, instructions
                             )
-
         else:
             instructions = myqlm_call_operation(op, qureg)
             if instructions is not None:
@@ -128,15 +127,15 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
         op = [qlm.ISWAP, qureg[operation.control()], qureg[operation.target()]]
     elif "SingleQubitGate" in tags:
         matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate("Gate", [], arity=1, matrix_generator=matrix)
+        gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.qubit()]]
     elif "SingleQubitGateOperation" in tags:
         matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate("Gate", [], arity=1, matrix_generator=matrix)
+        gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.qubit()]]
     elif "TwoQubitGateOperation" in tags:
         matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate("Gate", [], arity=2, matrix_generator=matrix)
+        gate = qlm.AbstractGate(tags[-1], [], arity=2, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.control()], qureg[operation.target()]]
     elif "MeasureQubit" in tags:
         pass
