@@ -2,6 +2,10 @@
 
 ## Not released
 
+## 0.4.6
+
+* Update to qoqo 1.4
+
 ## 0.4.5
 
 * Updated to qoqo 1.3.1
