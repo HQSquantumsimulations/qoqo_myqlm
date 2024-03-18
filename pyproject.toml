@@ -7,7 +7,6 @@ readme = "README.md"
 requires-python = ">3.8, <3.12"
 dependencies = [
     "qoqo>=1.10",
-    'qoqo_calculator_pyo3>=1.1',
     "numpy",
     'myqlm'
 ]

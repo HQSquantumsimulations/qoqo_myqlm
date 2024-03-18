@@ -18,8 +18,6 @@ import numpy.testing as npt
 from qoqo import operations as ops
 from qoqo import Circuit
 from qoqo_myqlm import MyQLMBackend
-import math
-from qoqo_calculator_pyo3 import CalculatorFloat, Calculator
 
 
 def test_myqlm_backend():
