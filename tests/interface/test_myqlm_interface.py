@@ -73,6 +73,8 @@ def test_circuit_translation():
     circuit += ops.Hadamard(qubit=0)
     circuit += ops.RotateX(qubit=1, theta=np.pi / 2)
     circuit += ops.CNOT(control=0, target=1)
+    circuit += ops.VariableMSXX(1, 0, theta=0.0245044)
+    circuit += ops.VariableMSXX(1, 0, theta=0.1245044)
     circuit += ops.MeasureQubit(qubit=0, readout="ro", readout_index=0)
     circuit += ops.MeasureQubit(qubit=1, readout="ro", readout_index=1)
 
@@ -81,6 +83,26 @@ def test_circuit_translation():
     myqlm_program.apply(qlm.H, qubits[0])
     myqlm_program.apply(qlm.RX(np.pi / 2), qubits[1])
     myqlm_program.apply(qlm.CNOT, qubits[0], qubits[1])
+    myqlm_program.apply(
+        qlm.AbstractGate(
+            "VariableMSXX",
+            [float],
+            arity=2,
+            matrix_generator=generate_VariableMSXX_matrix,
+        )(0.0245044),
+        qubits[1],
+        qubits[0],
+    )
+    myqlm_program.apply(
+        qlm.AbstractGate(
+            "VariableMSXX",
+            [float],
+            arity=2,
+            matrix_generator=generate_VariableMSXX_matrix,
+        )(0.1245044),
+        qubits[1],
+        qubits[0],
+    )
     myqlm_circuit = myqlm_program.to_circ()
 
     translated_circuit = myqlm_call_circuit(circuit=circuit, number_qubits=2)

@@ -12,7 +12,11 @@
 import numpy as np
 
 
-def generate_VariableMSXX_matrix(theta):
+def generate_VariableMSXX_matrix(theta: float):
+    """Generate the VariableMSXX unitary matrix
+    from https://hqsquantumsimulations.github.io/qoqo_examples/gate_operations/two_qubit_gates.html#variablesmsxx
+    """
+
     cos_component = np.cos(theta / 2)
     sin_component = -1j * np.sin(theta / 2)
     U = np.array(

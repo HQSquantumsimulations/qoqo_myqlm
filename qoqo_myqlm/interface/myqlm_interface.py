@@ -35,7 +35,7 @@ def myqlm_call_circuit(
     Returns:
         qlm.Program: translated circuit
     """
-    myqlm_program = qlm.Program(default_gate_set=False)
+    myqlm_program = qlm.Program()
     qureg = myqlm_program.qalloc(number_qubits)
     for op in circuit:
         if "PragmaActiveReset" in op.tags():
