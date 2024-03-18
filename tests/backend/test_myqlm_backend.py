@@ -16,27 +16,21 @@ import numpy as np
 import numpy.testing as npt
 from qoqo import operations as ops
 from qoqo import Circuit
-from qoqo_myqlm import (
-    MyQLMBackend
-)
+from qoqo_myqlm import MyQLMBackend
 import math
-from qoqo_calculator_pyo3 import (
-    CalculatorFloat,
-    Calculator
-)
+from qoqo_calculator_pyo3 import CalculatorFloat, Calculator
 
 
 def test_myqlm_backend():
     """Testing the MyQLM functionality with the MyQLM backend"""
     circuit = Circuit()
-    circuit += ops.DefinitionBit(name='ro', length=2, is_output=True)
+    circuit += ops.DefinitionBit(name="ro", length=2, is_output=True)
     circuit += ops.RotateZ(qubit=0, theta=0)
     circuit += ops.PauliX(qubit=1)
-    circuit += ops.MeasureQubit(qubit=0, readout='ro', readout_index=0)
-    circuit += ops.MeasureQubit(qubit=1, readout='ro', readout_index=1)
+    circuit += ops.MeasureQubit(qubit=0, readout="ro", readout_index=0)
+    circuit += ops.MeasureQubit(qubit=1, readout="ro", readout_index=1)
 
-    backend = MyQLMBackend(number_qubits=2,
-                           number_measurements=5)
+    backend = MyQLMBackend(number_qubits=2, number_measurements=5)
 
     # (bit_dict, float_dict, complex_dict) = backend.run_circuit(circuit)
     # npt.assert_equal(float_dict, dict())
@@ -44,5 +38,5 @@ def test_myqlm_backend():
     # npt.assert_equal(bit_dict['ro'], [np.array([0., 1.])] * 5)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main(sys.argv)

@@ -2,6 +2,10 @@
 
 ## Not released
 
+## 0.4.7
+
+* Fix issue with VariableMSXX gate conversion. Update to qoqo 1.10
+
 ## 0.4.6
 
 * Update to qoqo 1.4

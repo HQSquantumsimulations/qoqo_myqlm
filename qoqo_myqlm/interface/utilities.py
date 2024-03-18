@@ -1,5 +1,4 @@
-"""MyQLM interface for qoqo operations and circuits."""
-# Copyright © 2019-2021 HQS Quantum Simulations GmbH. All Rights Reserved.
+# Copyright © 2019-2024 HQS Quantum Simulations GmbH. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
 # in compliance with the License. You may obtain a copy of the License at
@@ -10,11 +9,19 @@
 # is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
+import numpy as np
 
-from qoqo_myqlm.interface.myqlm_interface import (
-    myqlm_call_operation,
-    myqlm_call_circuit,
-)
-from qoqo_myqlm.interface.utilities import generate_VariableMSXX_matrix
 
-__all__ = ("myqlm_call_operation", "myqlm_call_circuit", "generate_VariableMSXX_matrix")
+def generate_VariableMSXX_matrix(theta):
+    cos_component = np.cos(theta / 2)
+    sin_component = -1j * np.sin(theta / 2)
+    U = np.array(
+        [
+            [cos_component, 0, 0, sin_component],
+            [0, cos_component, sin_component, 0],
+            [0, sin_component, cos_component, 0],
+            [sin_component, 0, 0, cos_component],
+        ]
+    )
+
+    return U

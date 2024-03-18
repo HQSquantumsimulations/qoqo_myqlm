@@ -1,5 +1,6 @@
 """Define the MyQLM interface for qoqo operations."""
-# Copyright © 2019-2021 HQS Quantum Simulations GmbH. All Rights Reserved.
+
+# Copyright © 2019-2024 HQS Quantum Simulations GmbH. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
 # in compliance with the License. You may obtain a copy of the License at
@@ -13,6 +14,7 @@
 from qoqo import Circuit
 from typing import cast, List, Any
 import qat.lang.AQASM as qlm
+from .utilities import generate_VariableMSXX_matrix
 
 
 def myqlm_call_circuit(
@@ -33,7 +35,7 @@ def myqlm_call_circuit(
     Returns:
         qlm.Program: translated circuit
     """
-    myqlm_program = qlm.Program()
+    myqlm_program = qlm.Program(default_gate_set=False)
     qureg = myqlm_program.qalloc(number_qubits)
     for op in circuit:
         if "PragmaActiveReset" in op.tags():
@@ -125,6 +127,19 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
         op = [qlm.SWAP, qureg[operation.control()], qureg[operation.target()]]
     elif "ISwap" in tags:
         op = [qlm.ISWAP, qureg[operation.control()], qureg[operation.target()]]
+    elif "VariableMSXX" in tags:
+        gate = qlm.AbstractGate(
+            "VariableMSXX",
+            [float],
+            arity=2,
+            matrix_generator=generate_VariableMSXX_matrix,
+        )
+        op = [
+            gate(operation.theta().float()),
+            qureg[operation.control()],
+            qureg[operation.target()],
+        ]
+
     elif "SingleQubitGate" in tags:
         matrix = operation.unitary_matrix()
         gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
@@ -134,8 +149,9 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
         gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.qubit()]]
     elif "TwoQubitGateOperation" in tags:
+        gate_name = tags[-1]
         matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate(tags[-1], [], arity=2, matrix_generator=lambda: matrix)
+        gate = qlm.AbstractGate(gate_name, [], arity=2, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.control()], qureg[operation.target()]]
     elif "MeasureQubit" in tags:
         pass
