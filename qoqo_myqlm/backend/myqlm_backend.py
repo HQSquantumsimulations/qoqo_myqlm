@@ -89,9 +89,7 @@ class MyQLMBackend(object):
         else:
             raise TypeError("Job_type specified is neither 'SAMPLE' nor 'OBS'")
 
-    def run_circuit(
-        self, circuit: Circuit
-    ) -> Tuple[
+    def run_circuit(self, circuit: Circuit) -> Tuple[
         Dict[str, List[List[bool]]],
         Dict[str, List[List[float]]],
         Dict[str, List[List[complex]]],

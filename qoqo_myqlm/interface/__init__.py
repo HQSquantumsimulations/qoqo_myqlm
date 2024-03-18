@@ -1,4 +1,5 @@
 """MyQLM interface for qoqo operations and circuits."""
+
 # Copyright © 2019-2021 HQS Quantum Simulations GmbH. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
