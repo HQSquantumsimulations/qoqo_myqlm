@@ -1,4 +1,5 @@
 """MyQLM interface for qoqo operations and circuits."""
+
 # Copyright © 2019-2021 HQS Quantum Simulations GmbH. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -15,8 +16,6 @@ from qoqo_myqlm.interface.myqlm_interface import (
     myqlm_call_operation,
     myqlm_call_circuit,
 )
+from qoqo_myqlm.interface.utilities import generate_VariableMSXX_matrix
 
-__all__ = (
-    "myqlm_call_operation",
-    "myqlm_call_circuit",
-)
+__all__ = ("myqlm_call_operation", "myqlm_call_circuit", "generate_VariableMSXX_matrix")

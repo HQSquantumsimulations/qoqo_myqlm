@@ -1,5 +1,6 @@
 """Backend producing MyQLM"""
-# Copyright © 2019-2021 HQS Quantum Simulations GmbH. All Rights Reserved.
+
+# Copyright © 2019-2024 HQS Quantum Simulations GmbH. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
 # in compliance with the License. You may obtain a copy of the License at
@@ -88,9 +89,7 @@ class MyQLMBackend(object):
         else:
             raise TypeError("Job_type specified is neither 'SAMPLE' nor 'OBS'")
 
-    def run_circuit(
-        self, circuit: Circuit
-    ) -> Tuple[
+    def run_circuit(self, circuit: Circuit) -> Tuple[
         Dict[str, List[List[bool]]],
         Dict[str, List[List[float]]],
         Dict[str, List[List[complex]]],
@@ -178,7 +177,8 @@ class MyQLMBackend(object):
         )
 
     def run_measurement_registers(
-        self, measurement: Any  # noqa
+        self,
+        measurement: Any,  # noqa
     ) -> Tuple[
         Dict[str, List[List[bool]]],
         Dict[str, List[List[float]]],
