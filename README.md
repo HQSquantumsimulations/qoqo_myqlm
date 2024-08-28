@@ -5,7 +5,7 @@
 [![Documentation Status](https://readthedocs.org/projects/qoqo-myqlm/badge/?version=latest)](https://qoqo-myqlm.readthedocs.io/en/latest/?badge=latest)
 [![GitHub Workflow Status](https://github.com/HQSquantumsimulations/qoqo_myqlm/workflows/ci_tests/badge.svg)](https://github.com/HQSquantumsimulations/qoqo_myqlm/actions)
 [![PyPI](https://img.shields.io/pypi/v/qoqo_myqlm)](https://pypi.org/project/qoqo_myqlm/)
-![PyPI - License](https://img.shields.io/pypi/l/qoqo_myqlm)
+![PyPI - License](https://img.shields.io/github/license/HQSquantumsimulations/qoqo_myqlm?label=license)
 [![PyPI - Format](https://img.shields.io/pypi/format/qoqo_myqlm)](https://pypi.org/project/qoqo_myqlm/)
 
 MyQLM interface for for the qoqo quantum toolkit by [HQS Quantum Simulations](https://quantumsimulations.de).
