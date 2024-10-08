@@ -1,9 +1,0 @@
-[book]
-authors = ["HQS Quantum Simulations"]
-language = "en"
-multilingual = false
-src = "src"
-title = "HQS qoqo_myqlm User Documentation"
-
-[output.html]
-mathjax-support = true

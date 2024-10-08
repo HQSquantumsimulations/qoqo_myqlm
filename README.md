@@ -2,7 +2,7 @@
 
 
 # qoqo_myqlm
-[![Documentation Status](https://img.shields.io/badge/docs-documentation-green)](https://hqsquantumsimulations.github.io/qoqo-myqlm/html/index.html)
+[![Documentation Status](https://img.shields.io/badge/docs-read-blue)](https://hqsquantumsimulations.github.io/qoqo_myqlm/)
 [![GitHub Workflow Status](https://github.com/HQSquantumsimulations/qoqo_myqlm/workflows/ci_tests/badge.svg)](https://github.com/HQSquantumsimulations/qoqo_myqlm/actions)
 [![PyPI](https://img.shields.io/pypi/v/qoqo_myqlm)](https://pypi.org/project/qoqo_myqlm/)
 ![PyPI - License](https://img.shields.io/badge/license-Apache_2.0-green)
