@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>qoqo_myqlm &mdash; qoqo_myqlm 0.4.8 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=03a5fb44"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="qoqo_myqlm.myqlm_call_operation" href="generated/qoqo_myqlm.myqlm_call_operation.html" />
+    <link rel="prev" title="qoqo myqlm documentation" href="../modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            qoqo_myqlm
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../modules.html">qoqo myqlm documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">qoqo_myqlm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/qoqo_myqlm.myqlm_call_operation.html">qoqo_myqlm.myqlm_call_operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/qoqo_myqlm.myqlm_call_circuit.html">qoqo_myqlm.myqlm_call_circuit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/qoqo_myqlm.MyQLMBackend.html">qoqo_myqlm.MyQLMBackend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qoqo_myqlm.MyQLMBackend"><code class="docutils literal notranslate"><span class="pre">MyQLMBackend</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#qoqo_myqlm.MyQLMBackend.__init__"><code class="docutils literal notranslate"><span class="pre">MyQLMBackend.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qoqo_myqlm.MyQLMBackend.__weakref__"><code class="docutils literal notranslate"><span class="pre">MyQLMBackend.__weakref__</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qoqo_myqlm.MyQLMBackend.run_circuit"><code class="docutils literal notranslate"><span class="pre">MyQLMBackend.run_circuit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qoqo_myqlm.MyQLMBackend.run_measurement"><code class="docutils literal notranslate"><span class="pre">MyQLMBackend.run_measurement()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#qoqo_myqlm.MyQLMBackend.run_measurement_registers"><code class="docutils literal notranslate"><span class="pre">MyQLMBackend.run_measurement_registers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#qoqo_myqlm.generate_VariableMSXX_matrix"><code class="docutils literal notranslate"><span class="pre">generate_VariableMSXX_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qoqo_myqlm.myqlm_call_circuit"><code class="docutils literal notranslate"><span class="pre">myqlm_call_circuit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qoqo_myqlm.myqlm_call_operation"><code class="docutils literal notranslate"><span class="pre">myqlm_call_operation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">qoqo_myqlm</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../modules.html">qoqo myqlm documentation</a></li>
+      <li class="breadcrumb-item active">qoqo_myqlm</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/qoqo_myqlm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-qoqo_myqlm">
+<span id="qoqo-myqlm"></span><h1>qoqo_myqlm<a class="headerlink" href="#module-qoqo_myqlm" title="Link to this heading"></a></h1>
+<p>MyQLM interface for qoqo.</p>
+<p>Translates qoqo operations and circuits to MyQLM operations via the interface,
+and Creates a MyQLM file with MyQLMBackend.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qoqo_myqlm.myqlm_call_operation" title="qoqo_myqlm.myqlm_call_operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">myqlm_call_operation</span></code></a>(operation, qureg)</p></td>
+<td><p>Translate a qoqo operation to MyQLM text</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qoqo_myqlm.myqlm_call_circuit" title="qoqo_myqlm.myqlm_call_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">myqlm_call_circuit</span></code></a>(circuit, number_qubits[, ...])</p></td>
+<td><p>Translate the qoqo circuit into MyQLM ouput</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qoqo_myqlm.MyQLMBackend" title="qoqo_myqlm.MyQLMBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MyQLMBackend</span></code></a>([number_qubits, ...])</p></td>
+<td><p>Backend to qoqo that produces MyQLM output which can be imported.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qoqo_myqlm.generate_VariableMSXX_matrix" title="qoqo_myqlm.generate_VariableMSXX_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_VariableMSXX_matrix</span></code></a>(theta)</p></td>
+<td><p>Generate the VariableMSXX unitary matrix from <a class="reference external" href="https://hqsquantumsimulations.github.io/qoqo_examples/gate_operations/two_qubit_gates.html#variablesmsxx">https://hqsquantumsimulations.github.io/qoqo_examples/gate_operations/two_qubit_gates.html#variablesmsxx</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#qoqo_myqlm.myqlm_call_circuit" title="qoqo_myqlm.myqlm_call_circuit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">myqlm_call_circuit</span></code></a>(circuit, number_qubits[, ...])</p></td>
+<td><p>Translate the qoqo circuit into MyQLM ouput</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qoqo_myqlm.myqlm_call_operation" title="qoqo_myqlm.myqlm_call_operation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">myqlm_call_operation</span></code></a>(operation, qureg)</p></td>
+<td><p>Translate a qoqo operation to MyQLM text</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#qoqo_myqlm.MyQLMBackend" title="qoqo_myqlm.MyQLMBackend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MyQLMBackend</span></code></a>([number_qubits, ...])</p></td>
+<td><p>Backend to qoqo that produces MyQLM output which can be imported.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="qoqo_myqlm.MyQLMBackend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qoqo_myqlm.</span></span><span class="sig-name descname"><span class="pre">MyQLMBackend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_measurements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SAMPLE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'active_qubits_only'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_QLM_submission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qoqo_myqlm/backend/myqlm_backend.html#MyQLMBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qoqo_myqlm.MyQLMBackend" title="Link to this definition"></a></dt>
+<dd><p>Backend to qoqo that produces MyQLM output which can be imported.</p>
+<p>This backend takes a qoqo circuit to be run on a certain device and returns a MyQLM file
+containing the translated circuit. The circuit itself is translated using the qoqo_myqlm
+interface.</p>
+<p>Initialize MyQLM Backend</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number_qubits</strong> -- The number of qubits to use</p></li>
+<li><p><strong>number_measurements</strong> -- The number of measurement repetitions. If set to 0:
+- simulator: tries to output all the possible final states (with probabilities)
+- quantum processor: uses the largest amount of shots authorised by the hardware</p></li>
+<li><p><strong>device</strong> -- The device specification</p></li>
+<li><p><strong>job_type</strong> -- MyQLM job type to run:
+- SAMPLE (default): measures Z on all qubits
+- OBS: measures a specific observable, defined by a matrix on all qubits</p></li>
+<li><p><strong>observable</strong> -- if &quot;OBS&quot; is selected as the job type, this is the matrix of
+the observable to measure.</p></li>
+<li><p><strong>qpu</strong> -- QPU machine to use (quantum processor or simulator) with relevant keywords</p></li>
+<li><p><strong>mode</strong> -- noise mode, can be active_qubits_only, parallelization_blocks, all_qubits</p></li>
+<li><p><strong>time_QLM_submission</strong> -- toggle the print of the timing for the job submission to QLM</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> -- Job_type specified is neither 'SAMPLE' nor 'OBS'</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="qoqo_myqlm.MyQLMBackend.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_measurements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'SAMPLE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qpu</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'active_qubits_only'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_QLM_submission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qoqo_myqlm/backend/myqlm_backend.html#MyQLMBackend.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qoqo_myqlm.MyQLMBackend.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize MyQLM Backend</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>number_qubits</strong> -- The number of qubits to use</p></li>
+<li><p><strong>number_measurements</strong> -- The number of measurement repetitions. If set to 0:
+- simulator: tries to output all the possible final states (with probabilities)
+- quantum processor: uses the largest amount of shots authorised by the hardware</p></li>
+<li><p><strong>device</strong> -- The device specification</p></li>
+<li><p><strong>job_type</strong> -- MyQLM job type to run:
+- SAMPLE (default): measures Z on all qubits
+- OBS: measures a specific observable, defined by a matrix on all qubits</p></li>
+<li><p><strong>observable</strong> -- if &quot;OBS&quot; is selected as the job type, this is the matrix of
+the observable to measure.</p></li>
+<li><p><strong>qpu</strong> -- QPU machine to use (quantum processor or simulator) with relevant keywords</p></li>
+<li><p><strong>mode</strong> -- noise mode, can be active_qubits_only, parallelization_blocks, all_qubits</p></li>
+<li><p><strong>time_QLM_submission</strong> -- toggle the print of the timing for the job submission to QLM</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> -- Job_type specified is neither 'SAMPLE' nor 'OBS'</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="qoqo_myqlm.MyQLMBackend.__weakref__">
+<span class="sig-name descname"><span class="pre">__weakref__</span></span><a class="headerlink" href="#qoqo_myqlm.MyQLMBackend.__weakref__" title="Link to this definition"></a></dt>
+<dd><p>list of weak references to the object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qoqo_myqlm.MyQLMBackend.run_circuit">
+<span class="sig-name descname"><span class="pre">run_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Circuit</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qoqo_myqlm/backend/myqlm_backend.html#MyQLMBackend.run_circuit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qoqo_myqlm.MyQLMBackend.run_circuit" title="Link to this definition"></a></dt>
+<dd><p>Turn the circuit into MyQLM and save to file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>circuit</strong> -- The circuit that is run</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Tuple[Dict[str, List[List[bool]]],</dt><dd><p>Dict[str, List[List[float]]],
+Dict[str, List[List[complex]]]]</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qoqo_myqlm.MyQLMBackend.run_measurement">
+<span class="sig-name descname"><span class="pre">run_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/qoqo_myqlm/backend/myqlm_backend.html#MyQLMBackend.run_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qoqo_myqlm.MyQLMBackend.run_measurement" title="Link to this definition"></a></dt>
+<dd><p>Run a circuit with the PyQuEST backend</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>measurement</strong> -- The measurement that is run</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Optional[Dict[str, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qoqo_myqlm.MyQLMBackend.run_measurement_registers">
+<span class="sig-name descname"><span class="pre">run_measurement_registers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/qoqo_myqlm/backend/myqlm_backend.html#MyQLMBackend.run_measurement_registers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qoqo_myqlm.MyQLMBackend.run_measurement_registers" title="Link to this definition"></a></dt>
+<dd><p>Run all circuits of a measurement with the PyQuEST backend</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>measurement</strong> -- The measurement that is run</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Tuple[Dict[str, List[List[bool]]],</dt><dd><p>Dict[str, List[List[float]]],
+Dict[str, List[List[complex]]]]</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qoqo_myqlm.generate_VariableMSXX_matrix">
+<span class="sig-prename descclassname"><span class="pre">qoqo_myqlm.</span></span><span class="sig-name descname"><span class="pre">generate_VariableMSXX_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/qoqo_myqlm/interface/utilities.html#generate_VariableMSXX_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qoqo_myqlm.generate_VariableMSXX_matrix" title="Link to this definition"></a></dt>
+<dd><p>Generate the VariableMSXX unitary matrix
+from <a class="reference external" href="https://hqsquantumsimulations.github.io/qoqo_examples/gate_operations/two_qubit_gates.html#variablesmsxx">https://hqsquantumsimulations.github.io/qoqo_examples/gate_operations/two_qubit_gates.html#variablesmsxx</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qoqo_myqlm.myqlm_call_circuit">
+<span class="sig-prename descclassname"><span class="pre">qoqo_myqlm.</span></span><span class="sig-name descname"><span class="pre">myqlm_call_circuit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Circuit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noise_mode_all_qubits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Program</span></span></span><a class="reference internal" href="../_modules/qoqo_myqlm/interface/myqlm_interface.html#myqlm_call_circuit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qoqo_myqlm.myqlm_call_circuit" title="Link to this definition"></a></dt>
+<dd><p>Translate the qoqo circuit into MyQLM ouput</p>
+<p>The qoqo_myqlm interface iterates through the qoqo circuit and translates each qoqo operation
+to MyQLM output (strings).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circuit</strong> -- The qoqo circuit that is translated</p></li>
+<li><p><strong>number_qubits</strong> -- Number of qubits in the quantum register</p></li>
+<li><p><strong>noise_mode_all_qubits</strong> -- boolean to indicate whether to apply noise to all qubits or only to
+active qubits</p></li>
+<li><p><strong>**kwargs</strong> -- Additional keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>translated circuit</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>qlm.Program</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qoqo_myqlm.myqlm_call_operation">
+<span class="sig-prename descclassname"><span class="pre">qoqo_myqlm.</span></span><span class="sig-name descname"><span class="pre">myqlm_call_operation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qureg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">qalloc</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="reference internal" href="../_modules/qoqo_myqlm/interface/myqlm_interface.html#myqlm_call_operation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#qoqo_myqlm.myqlm_call_operation" title="Link to this definition"></a></dt>
+<dd><p>Translate a qoqo operation to MyQLM text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operation</strong> -- The qoqo operation that is translated</p></li>
+<li><p><strong>qureg</strong> -- The quantum register pyquest_cffi operates on</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>arguments to be used in the &quot;apply&quot; function</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> -- Operation not in MyQLM backend</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../modules.html" class="btn btn-neutral float-left" title="qoqo myqlm documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/qoqo_myqlm.myqlm_call_operation.html" class="btn btn-neutral float-right" title="qoqo_myqlm.myqlm_call_operation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2021, HQS Quantum Simulations GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
