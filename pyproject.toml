@@ -1,12 +1,12 @@
 [project]
 name = "qoqo_myqlm"
-version = "0.4.7"
+version = "0.4.8"
 description = "An inteface to execute circuits from QOQO to MYQLM"
 authors = [{name="HQS Quantum Simulation GmbH", email="info@quantumsimulations.de"}]
 readme = "README.md"
 requires-python = ">3.8, <3.12"
 dependencies = [
-    "qoqo>=1.10",
+    "qoqo>=1.15",
     "numpy",
     'myqlm'
 ]
