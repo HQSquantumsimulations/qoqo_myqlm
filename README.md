@@ -15,6 +15,7 @@ _General_
 qoqo-myqlm provides the interface to the Atos MyQLM software.
 MyQLM is under the myQLM license ( see https://myqlm.github.io/myqlm_specific/license.html for further infomation).
 qoqo-myqlm itself is provided under the Apache-2.0 license but can only be used after installing myQLM and agreeing to the myQLM license.
+The API documentation (Python) can be found [here](https://hqsquantumsimulations.github.io/qoqo_myqlm/generated/qoqo_myqlm.html)
 
 _Testing_
 
