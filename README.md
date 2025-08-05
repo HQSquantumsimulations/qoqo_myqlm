@@ -2,11 +2,10 @@
 
 
 # qoqo_myqlm
-[![Documentation Status](https://readthedocs.org/projects/qoqo-myqlm/badge/?version=latest)](https://qoqo-myqlm.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://img.shields.io/badge/docs-read-blue)](https://hqsquantumsimulations.github.io/qoqo_myqlm/)
 [![GitHub Workflow Status](https://github.com/HQSquantumsimulations/qoqo_myqlm/workflows/ci_tests/badge.svg)](https://github.com/HQSquantumsimulations/qoqo_myqlm/actions)
 [![PyPI](https://img.shields.io/pypi/v/qoqo_myqlm)](https://pypi.org/project/qoqo_myqlm/)
 ![PyPI - License](https://img.shields.io/github/license/HQSquantumsimulations/qoqo_myqlm?label=license)
-[![PyPI - Format](https://img.shields.io/pypi/format/qoqo_myqlm)](https://pypi.org/project/qoqo_myqlm/)
 
 MyQLM interface for for the qoqo quantum toolkit by [HQS Quantum Simulations](https://quantumsimulations.de).
 
@@ -14,7 +13,10 @@ _General_
 
 qoqo-myqlm provides the interface to the Atos MyQLM software.
 MyQLM is under the myQLM license ( see https://myqlm.github.io/myqlm_specific/license.html for further infomation).
+
 qoqo-myqlm itself is provided under the Apache-2.0 license but can only be used after installing myQLM and agreeing to the myQLM license.
+
+The API documentation (Python) can be found [here](https://hqsquantumsimulations.github.io/qoqo_myqlm/generated/qoqo_myqlm.html)
 
 _Testing_
 
