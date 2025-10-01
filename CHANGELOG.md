@@ -2,6 +2,8 @@
 
 ## Not released
 
+* Removed Python 3.9 support.
+
 ## 0.4.8
 
 * Switched from readthedocs to github pages
