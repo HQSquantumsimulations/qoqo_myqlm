@@ -1,6 +1,6 @@
 [project]
 name = "qoqo_myqlm"
-version = "0.4.8"
+version = "0.5.0"
 description = "An inteface to execute circuits from QOQO to MYQLM"
 authors = [{name="HQS Quantum Simulation GmbH", email="info@quantumsimulations.de"}]
 readme = "README.md"
