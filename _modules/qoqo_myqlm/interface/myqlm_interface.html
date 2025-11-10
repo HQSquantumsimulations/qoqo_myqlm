@@ -5,15 +5,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>qoqo_myqlm.interface.myqlm_interface &mdash; qoqo_myqlm 0.4.8 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=7ab3649f" />
+  <title>qoqo_myqlm.interface.myqlm_interface &mdash; qoqo_myqlm 0.5.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=03a5fb44"></script>
-      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/documentation_options.js?v=5e5be09d"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -83,15 +83,15 @@
 <span class="c1"># is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express</span>
 <span class="c1"># or implied. See the License for the specific language governing permissions and limitations under</span>
 <span class="c1"># the License.</span>
-<span class="kn">from</span> <span class="nn">qoqo</span> <span class="kn">import</span> <span class="n">Circuit</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">cast</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
-<span class="kn">import</span> <span class="nn">qat.lang.AQASM</span> <span class="k">as</span> <span class="nn">qlm</span>
-<span class="kn">from</span> <span class="nn">.utilities</span> <span class="kn">import</span> <span class="n">generate_VariableMSXX_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qoqo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Circuit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">cast</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">qat.lang.AQASM</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qlm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_VariableMSXX_matrix</span>
 
 
 <div class="viewcode-block" id="myqlm_call_circuit">
 <a class="viewcode-back" href="../../../generated/qoqo_myqlm.html#qoqo_myqlm.myqlm_call_circuit">[docs]</a>
-<span class="k">def</span> <span class="nf">myqlm_call_circuit</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">myqlm_call_circuit</span><span class="p">(</span>
     <span class="n">circuit</span><span class="p">:</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">number_qubits</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">noise_mode_all_qubits</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">qlm</span><span class="o">.</span><span class="n">Program</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Translate the qoqo circuit into MyQLM ouput</span>
@@ -139,7 +139,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">apply_I_on_inactive_qubits</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">apply_I_on_inactive_qubits</span><span class="p">(</span>
     <span class="n">number_qubits</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">myqlm_program</span><span class="p">:</span> <span class="n">qlm</span><span class="o">.</span><span class="n">program</span><span class="o">.</span><span class="n">Program</span><span class="p">,</span>
     <span class="n">qureg</span><span class="p">:</span> <span class="n">qlm</span><span class="o">.</span><span class="n">bits</span><span class="o">.</span><span class="n">QRegister</span><span class="p">,</span>
@@ -161,7 +161,7 @@
 
 <div class="viewcode-block" id="myqlm_call_operation">
 <a class="viewcode-back" href="../../../generated/qoqo_myqlm.html#qoqo_myqlm.myqlm_call_operation">[docs]</a>
-<span class="k">def</span> <span class="nf">myqlm_call_operation</span><span class="p">(</span><span class="n">operation</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">qureg</span><span class="p">:</span> <span class="n">qlm</span><span class="o">.</span><span class="n">Program</span><span class="o">.</span><span class="n">qalloc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>  <span class="c1"># noqa</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">myqlm_call_operation</span><span class="p">(</span><span class="n">operation</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">qureg</span><span class="p">:</span> <span class="n">qlm</span><span class="o">.</span><span class="n">Program</span><span class="o">.</span><span class="n">qalloc</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>  <span class="c1"># noqa</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Translate a qoqo operation to MyQLM text</span>
 
 <span class="sd">    Args:</span>
