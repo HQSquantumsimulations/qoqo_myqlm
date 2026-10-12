@@ -12,7 +12,7 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 from qoqo import Circuit
-from typing import cast, List, Any
+from typing import cast, Any
 import qat.lang.AQASM as qlm
 from .utilities import generate_VariableMSXX_matrix
 
@@ -68,7 +68,7 @@ def apply_I_on_inactive_qubits(
     number_qubits: int,
     myqlm_program: qlm.program.Program,
     qureg: qlm.bits.QRegister,
-    instructions: List,
+    instructions: list,
 ) -> None:
     """Applies an I gate to all inactive qubits in a quantum circuit.
 
@@ -84,7 +84,7 @@ def apply_I_on_inactive_qubits(
             myqlm_program.apply(qlm.I, qureg[qubit])
 
 
-def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # noqa
+def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> list:  # noqa
     """Translate a qoqo operation to MyQLM text
 
     Args:
@@ -92,12 +92,12 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
         qureg: The quantum register pyquest_cffi operates on
 
     Returns:
-        List: arguments to be used in the "apply" function
+        list: arguments to be used in the "apply" function
 
     Raises:
         RuntimeError: Operation not in MyQLM backend
     """
-    op = cast(List, None)
+    op = cast(list, None)
     tags = operation.tags()
     if "RotateZ" in tags:
         op = [qlm.RZ(operation.theta().float()), qureg[operation.qubit()]]

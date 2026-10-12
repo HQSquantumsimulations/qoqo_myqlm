@@ -31,7 +31,7 @@ def test_myqlm_backend():
 
     backend = MyQLMBackend(number_qubits=2, number_measurements=5)
 
-    (bit_dict, float_dict, complex_dict) = backend.run_circuit(circuit)
+    bit_dict, float_dict, complex_dict = backend.run_circuit(circuit)
     npt.assert_equal(float_dict, dict())
     npt.assert_equal(complex_dict, dict())
     npt.assert_equal(bit_dict["ro"], [np.array([0.0, 1.0])] * 5)
@@ -68,7 +68,7 @@ def test_myqlm_backend_with_VariableMSXX(thetas, outcome):
     circuit += ops.MeasureQubit(qubit=1, readout="ro", readout_index=1)
 
     backend = MyQLMBackend(number_qubits=2, number_measurements=0)
-    (bit_dict, _, _) = backend.run_circuit(circuit)
+    bit_dict, _, _ = backend.run_circuit(circuit)
     npt.assert_equal(bit_dict["ro"], outcome)
 
 
