@@ -11,9 +11,10 @@
 # is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
+
+import qat.lang.AQASM as qlm
 from qoqo import Circuit
 from typing import cast, Any
-import qat.lang.AQASM as qlm
 from .utilities import generate_VariableMSXX_matrix
 
 
@@ -84,7 +85,7 @@ def apply_I_on_inactive_qubits(
             myqlm_program.apply(qlm.I, qureg[qubit])
 
 
-def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> list:  # noqa
+def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> list:
     """Translate a qoqo operation to MyQLM text
 
     Args:
