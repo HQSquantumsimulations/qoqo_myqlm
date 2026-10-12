@@ -12,14 +12,16 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 
+import time
+import warnings
+from typing import Any, cast
+
 import numpy as np
 import qat
 from qat.qpus import get_default_qpu
 from qoqo import Circuit
+
 from qoqo_myqlm.interface import myqlm_call_circuit
-import time
-from typing import cast, Any
-import warnings
 
 
 class MyQLMBackend:

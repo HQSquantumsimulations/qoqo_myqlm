@@ -12,9 +12,11 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 
+from typing import Any, cast
+
 import qat.lang.AQASM as qlm
 from qoqo import Circuit
-from typing import cast, Any
+
 from .utilities import generate_VariableMSXX_matrix
 
 
