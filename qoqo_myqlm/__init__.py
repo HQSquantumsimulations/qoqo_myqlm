@@ -6,9 +6,9 @@ and Creates a MyQLM file with MyQLMBackend.
 .. autosummary::
     :toctree: generated/
 
-    myqlm_call_operation
-    myqlm_call_circuit
     MyQLMBackend
+    myqlm_call_circuit
+    myqlm_call_operation
 
 """
 
@@ -23,18 +23,18 @@ and Creates a MyQLM file with MyQLMBackend.
 # is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
-from qoqo_myqlm.interface import (
-    myqlm_call_operation,
-    myqlm_call_circuit,
-    generate_VariableMSXX_matrix,
-)
 from qoqo_myqlm.backend import (
     MyQLMBackend,
 )
+from qoqo_myqlm.interface import (
+    generate_VariableMSXX_matrix,
+    myqlm_call_circuit,
+    myqlm_call_operation,
+)
 
 __all__ = (
-    "myqlm_call_operation",
-    "myqlm_call_circuit",
     "MyQLMBackend",
     "generate_VariableMSXX_matrix",
+    "myqlm_call_circuit",
+    "myqlm_call_operation",
 )

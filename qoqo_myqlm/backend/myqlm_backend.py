@@ -11,17 +11,20 @@
 # is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
-from qoqo import Circuit
-from typing import Optional, Dict, List, Tuple, cast, Any
-from qoqo_myqlm.interface import myqlm_call_circuit
-import numpy as np
+
+import time
 import warnings
+from typing import Any, cast
+
+import numpy as np
 import qat
 from qat.qpus import get_default_qpu
-import time
+from qoqo import Circuit
+
+from qoqo_myqlm.interface import myqlm_call_circuit
 
 
-class MyQLMBackend(object):
+class MyQLMBackend:
     r"""Backend to qoqo that produces MyQLM output which can be imported.
 
     This backend takes a qoqo circuit to be run on a certain device and returns a MyQLM file
@@ -33,13 +36,13 @@ class MyQLMBackend(object):
         self,
         number_qubits: int = 1,
         number_measurements: int = 1,
-        device: Optional[Any] = None,  # noqa
+        device: Any | None = None,
         job_type: str = "SAMPLE",
-        observable: Optional[np.ndarray] = None,
-        qpu: Any = None,  # noqa
+        observable: np.ndarray | None = None,
+        qpu: Any = None,
         mode: str = "active_qubits_only",
         time_QLM_submission: bool = False,
-    ) -> None:  # noqa
+    ) -> None:
         """Initialize MyQLM Backend
 
         Args:
@@ -69,7 +72,7 @@ class MyQLMBackend(object):
         if qpu is None:
             qpu = get_default_qpu()
         self.qpu = qpu
-        self.all_qubits = True if mode == "all_qubits" else False
+        self.all_qubits = mode == "all_qubits"
 
         if job_type == "SAMPLE":
             if observable is not None:
@@ -89,10 +92,10 @@ class MyQLMBackend(object):
         else:
             raise TypeError("Job_type specified is neither 'SAMPLE' nor 'OBS'")
 
-    def run_circuit(self, circuit: Circuit) -> Tuple[
-        Dict[str, List[List[bool]]],
-        Dict[str, List[List[float]]],
-        Dict[str, List[List[complex]]],
+    def run_circuit(self, circuit: Circuit) -> tuple[
+        dict[str, list[list[bool]]],
+        dict[str, list[list[float]]],
+        dict[str, list[list[complex]]],
     ]:
         """Turn the circuit into MyQLM and save to file
 
@@ -100,25 +103,25 @@ class MyQLMBackend(object):
             circuit: The circuit that is run
 
         Returns:
-            Tuple[Dict[str, List[List[bool]]],
-                  Dict[str, List[List[float]]],
-                  Dict[str, List[List[complex]]]]
+            tuple[dict[str, list[list[bool]]],
+                  dict[str, list[list[float]]],
+                  dict[str, list[list[complex]]]]
         """
         # Initializing the classical registers for calculation and output
-        internal_bit_register_dict: Dict[str, List[bool]] = dict()
-        internal_float_register_dict: Dict[str, List[float]] = dict()
-        internal_complex_register_dict: Dict[str, List[complex]] = dict()
+        internal_bit_register_dict: dict[str, list[bool]] = {}
+        internal_float_register_dict: dict[str, list[float]] = {}
+        internal_complex_register_dict: dict[str, list[complex]] = {}
 
-        output_bit_register_dict: Dict[str, List[List[bool]]] = dict()
-        output_float_register_dict: Dict[str, List[List[float]]] = dict()
-        output_complex_register_dict: Dict[str, List[List[complex]]] = dict()
+        output_bit_register_dict: dict[str, list[list[bool]]] = {}
+        output_float_register_dict: dict[str, list[list[float]]] = {}
+        output_complex_register_dict: dict[str, list[list[complex]]] = {}
 
         for bit_def in circuit.filter_by_tag("DefinitionBit"):
             internal_bit_register_dict[bit_def.name()] = [
                 False for _ in range(bit_def.length())
             ]
             if bit_def.is_output():
-                output_bit_register_dict[bit_def.name()] = list()
+                output_bit_register_dict[bit_def.name()] = []
 
         for float_def in circuit.filter_by_tag("DefinitionFloat"):
             internal_float_register_dict[float_def.name()] = [
@@ -126,7 +129,7 @@ class MyQLMBackend(object):
             ]
             if float_def.is_output():
                 output_float_register_dict[float_def.name()] = cast(
-                    List[List[float]], list()
+                    list[list[float]], []
                 )
 
         for complex_def in circuit.filter_by_tag("DefinitionComplex"):
@@ -135,7 +138,7 @@ class MyQLMBackend(object):
             ]
             if complex_def.is_output():
                 output_complex_register_dict[complex_def.name()] = cast(
-                    List[List[complex]], list()
+                    list[list[complex]], []
                 )
 
         compiled_circuit = myqlm_call_circuit(
@@ -166,9 +169,9 @@ class MyQLMBackend(object):
 
         for sample in result:
             array = [qubit_state for qubit_state in sample.state]
-            output_bit_register_dict[list(output_bit_register_dict.keys())[0]].append(
-                array
-            )
+            output_bit_register_dict[
+                next(iter(output_bit_register_dict.keys()))
+            ].append(array)
 
         return (
             output_bit_register_dict,
@@ -178,11 +181,11 @@ class MyQLMBackend(object):
 
     def run_measurement_registers(
         self,
-        measurement: Any,  # noqa
-    ) -> Tuple[
-        Dict[str, List[List[bool]]],
-        Dict[str, List[List[float]]],
-        Dict[str, List[List[complex]]],
+        measurement: Any,
+    ) -> tuple[
+        dict[str, list[list[bool]]],
+        dict[str, list[list[float]]],
+        dict[str, list[list[complex]]],
     ]:
         """Run all circuits of a measurement with the PyQuEST backend
 
@@ -190,14 +193,14 @@ class MyQLMBackend(object):
             measurement: The measurement that is run
 
         Returns:
-            Tuple[Dict[str, List[List[bool]]],
-                  Dict[str, List[List[float]]],
-                  Dict[str, List[List[complex]]]]
+            tuple[dict[str, list[list[bool]]],
+                  dict[str, list[list[float]]],
+                  dict[str, list[list[complex]]]]
         """
         constant_circuit = measurement.constant_circuit()
-        output_bit_register_dict: Dict[str, List[List[bool]]] = dict()
-        output_float_register_dict: Dict[str, List[List[float]]] = dict()
-        output_complex_register_dict: Dict[str, List[List[complex]]] = dict()
+        output_bit_register_dict: dict[str, list[list[bool]]] = {}
+        output_float_register_dict: dict[str, list[list[float]]] = {}
+        output_complex_register_dict: dict[str, list[list[complex]]] = {}
         for circuit in measurement.circuits():
             if constant_circuit is None:
                 run_circuit = circuit
@@ -218,14 +221,14 @@ class MyQLMBackend(object):
             output_complex_register_dict,
         )
 
-    def run_measurement(self, measurement: Any) -> Optional[Dict[str, float]]:  # noqa
+    def run_measurement(self, measurement: Any) -> dict[str, float] | None:
         """Run a circuit with the PyQuEST backend
 
         Args:
             measurement: The measurement that is run
 
         Returns:
-            Optional[Dict[str, float]]
+            dict[str, float] | None
         """
         (
             output_bit_register_dict,

@@ -11,9 +11,12 @@
 # is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
-from qoqo import Circuit
-from typing import cast, List, Any
+
+from typing import Any, cast
+
 import qat.lang.AQASM as qlm
+from qoqo import Circuit
+
 from .utilities import generate_VariableMSXX_matrix
 
 
@@ -68,7 +71,7 @@ def apply_I_on_inactive_qubits(
     number_qubits: int,
     myqlm_program: qlm.program.Program,
     qureg: qlm.bits.QRegister,
-    instructions: List,
+    instructions: list,
 ) -> None:
     """Applies an I gate to all inactive qubits in a quantum circuit.
 
@@ -84,7 +87,7 @@ def apply_I_on_inactive_qubits(
             myqlm_program.apply(qlm.I, qureg[qubit])
 
 
-def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # noqa
+def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> list:
     """Translate a qoqo operation to MyQLM text
 
     Args:
@@ -92,12 +95,12 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
         qureg: The quantum register pyquest_cffi operates on
 
     Returns:
-        List: arguments to be used in the "apply" function
+        list: arguments to be used in the "apply" function
 
     Raises:
         RuntimeError: Operation not in MyQLM backend
     """
-    op = cast(List, None)
+    op = cast(list, None)
     tags = operation.tags()
     if "RotateZ" in tags:
         op = [qlm.RZ(operation.theta().float()), qureg[operation.qubit()]]
@@ -140,11 +143,7 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
             qureg[operation.target()],
         ]
 
-    elif "SingleQubitGate" in tags:
-        matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
-        op = [gate(), qureg[operation.qubit()]]
-    elif "SingleQubitGateOperation" in tags:
+    elif "SingleQubitGate" in tags or "SingleQubitGateOperation" in tags:
         matrix = operation.unitary_matrix()
         gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.qubit()]]
@@ -153,21 +152,16 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
         matrix = operation.unitary_matrix()
         gate = qlm.AbstractGate(gate_name, [], arity=2, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.control()], qureg[operation.target()]]
-    elif "MeasureQubit" in tags:
-        pass
-    elif "Definition" in tags:
-        pass
-    elif "PragmaRepeatedMeasurement" in tags:
-        pass
-    elif "PragmaSetNumberOfMeasurements" in tags:
-        pass
-    elif "PragmaStartDecompositionBlock" in tags:
-        pass
-    elif "PragmaGlobalPhase" in tags:
-        pass
-    elif "PragmaStopDecompositionBlock" in tags:
-        pass
-    elif "PragmaStopParallelBlock" in tags:
+    elif (
+        "MeasureQubit" in tags
+        or "Definition" in tags
+        or "PragmaRepeatedMeasurement" in tags
+        or "PragmaSetNumberOfMeasurements" in tags
+        or "PragmaStartDecompositionBlock" in tags
+        or "PragmaGlobalPhase" in tags
+        or "PragmaStopDecompositionBlock" in tags
+        or "PragmaStopParallelBlock" in tags
+    ):
         pass
     else:
         raise RuntimeError(f"Operation not in MyQLM backend tags={tags}")

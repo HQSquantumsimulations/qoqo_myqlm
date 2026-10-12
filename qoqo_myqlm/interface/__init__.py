@@ -13,9 +13,9 @@
 # the License.
 
 from qoqo_myqlm.interface.myqlm_interface import (
-    myqlm_call_operation,
     myqlm_call_circuit,
+    myqlm_call_operation,
 )
 from qoqo_myqlm.interface.utilities import generate_VariableMSXX_matrix
 
-__all__ = ("myqlm_call_operation", "myqlm_call_circuit", "generate_VariableMSXX_matrix")
+__all__ = ("generate_VariableMSXX_matrix", "myqlm_call_circuit", "myqlm_call_operation")
