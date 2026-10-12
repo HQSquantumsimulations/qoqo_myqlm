@@ -140,11 +140,7 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
             qureg[operation.target()],
         ]
 
-    elif "SingleQubitGate" in tags:
-        matrix = operation.unitary_matrix()
-        gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
-        op = [gate(), qureg[operation.qubit()]]
-    elif "SingleQubitGateOperation" in tags:
+    elif "SingleQubitGate" in tags or "SingleQubitGateOperation" in tags:
         matrix = operation.unitary_matrix()
         gate = qlm.AbstractGate(tags[-1], [], arity=1, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.qubit()]]
@@ -153,21 +149,16 @@ def myqlm_call_operation(operation: Any, qureg: qlm.Program.qalloc) -> List:  # 
         matrix = operation.unitary_matrix()
         gate = qlm.AbstractGate(gate_name, [], arity=2, matrix_generator=lambda: matrix)
         op = [gate(), qureg[operation.control()], qureg[operation.target()]]
-    elif "MeasureQubit" in tags:
-        pass
-    elif "Definition" in tags:
-        pass
-    elif "PragmaRepeatedMeasurement" in tags:
-        pass
-    elif "PragmaSetNumberOfMeasurements" in tags:
-        pass
-    elif "PragmaStartDecompositionBlock" in tags:
-        pass
-    elif "PragmaGlobalPhase" in tags:
-        pass
-    elif "PragmaStopDecompositionBlock" in tags:
-        pass
-    elif "PragmaStopParallelBlock" in tags:
+    elif (
+        "MeasureQubit" in tags
+        or "Definition" in tags
+        or "PragmaRepeatedMeasurement" in tags
+        or "PragmaSetNumberOfMeasurements" in tags
+        or "PragmaStartDecompositionBlock" in tags
+        or "PragmaGlobalPhase" in tags
+        or "PragmaStopDecompositionBlock" in tags
+        or "PragmaStopParallelBlock" in tags
+    ):
         pass
     else:
         raise RuntimeError(f"Operation not in MyQLM backend tags={tags}")
