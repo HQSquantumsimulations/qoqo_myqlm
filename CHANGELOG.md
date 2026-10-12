@@ -2,7 +2,10 @@
 
 ## Not released
 
+## 0.5.0
+
 * Removed Python 3.9 support.
+* Added Python 3.14 support.
 
 ## 0.4.8
 
